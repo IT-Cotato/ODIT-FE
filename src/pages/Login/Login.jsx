@@ -44,7 +44,8 @@ const LogoContainer = styled.div`
 
 const ButtonContatiner = styled.div`
   display: flex;
-  align-items: end;
+  flex-direction: column;
+  gap: 0.75rem;
 `;
 
 export default Login;
