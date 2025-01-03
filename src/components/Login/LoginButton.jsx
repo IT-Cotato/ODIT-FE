@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { ReactComponent as KakaoIcon } from '../../assets/icons/kakao-icon.svg';
 
-const LoginButton = ({ social }) => {
+const LoginButton = ({ social, onClick }) => {
   const getButtonStyles = () => {
     if (social === 'kakao') {
       return {
@@ -14,6 +14,7 @@ const LoginButton = ({ social }) => {
 
     return {
       background: '#FFFFFF',
+      text: '',
       icon: null,
     };
   };
@@ -21,7 +22,7 @@ const LoginButton = ({ social }) => {
   const { background, text, icon } = getButtonStyles();
 
   return (
-    <StyledButton $background={background}>
+    <StyledButton $background={background} onClick={onClick}>
       {icon}
       {text}
     </StyledButton>
