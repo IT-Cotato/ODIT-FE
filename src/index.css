@@ -13,9 +13,9 @@ body {
 }
 
 #root {
+  width: 100vw;
   max-width: 600px;
   height: 100vh;
   overflow: hidden;
   box-sizing: border-box;
-  padding: 1.5rem 1.25rem;
 }
