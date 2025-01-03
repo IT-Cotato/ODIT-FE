@@ -33,6 +33,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1.5rem;
 `;
 
 const LogoContainer = styled.div`
