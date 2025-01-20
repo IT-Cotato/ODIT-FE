@@ -50,6 +50,8 @@ const StyledButton = styled.button`
     top: 50%;
     left: 1.5rem;
     transform: translateY(-50%);
+    width: 1.5rem;
+    height: 1.5rem;
   }
 `;
 
