@@ -1,16 +1,16 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
-import HomeRedirect from '../pages/Home/HomeRedirect';
 import AuthGuard from '../components/common/AuthGuard';
 
+const AsyncHome = React.lazy(() => import('../pages/Home/Home'));
 const AsyncLogin = React.lazy(() => import('../pages/Login/Login'));
 const AsyncRegister = React.lazy(() => import('../pages/Register/Register'));
 
 const ROUTE_INFO = [
   {
     path: '/',
-    element: <HomeRedirect />,
-    isAuthRequired: false,
+    element: <AsyncHome />,
+    isAuthRequired: true,
   },
   {
     path: '/login',
