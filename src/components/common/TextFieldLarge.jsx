@@ -38,8 +38,8 @@ const StyledTextField = styled(TextField)(({ theme, outlineColor }) => ({
 
 const TextFieldLarge = ({
   outlined = true,
-  hasSearchAdornment = true,
-  hasClearAdornment = true,
+  hasSearchAdornment = false,
+  hasClearAdornment = false,
   placeholder = '',
   value = '',
   outlineColor,
