@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useTheme } from '@emotion/react';
 import { ReactComponent as KakaoIcon } from '../../assets/icons/kakao-icon.svg';
 
 const LoginButton = ({ social, onClick }) => {
+  const theme = useTheme();
+
   const getButtonStyles = () => {
     if (social === 'kakao') {
       return {
         background: '#F9E007',
         text: '카카오로 로그인하기',
+        color: theme.color.black[900],
         icon: <StyledKakaoIcon />,
       };
     }
@@ -19,10 +23,10 @@ const LoginButton = ({ social, onClick }) => {
     };
   };
 
-  const { background, text, icon } = getButtonStyles();
+  const { background, text, color, icon } = getButtonStyles();
 
   return (
-    <StyledButton $background={background} onClick={onClick}>
+    <StyledButton $background={background} $color={color} onClick={onClick}>
       {icon}
       {text}
     </StyledButton>
@@ -37,6 +41,7 @@ const StyledButton = styled.button`
   border-radius: 0.625rem;
   border: none;
   font-size: 1rem;
+  color: ${({ $color }) => $color};
   font-weight: 700;
   cursor: pointer;
 
