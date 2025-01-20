@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useNavigate } from 'react-router';
 import { HEADER_HEIGHT } from '../../constant';
 import { ReactComponent as ShevronLeft } from '../../assets/icons/chevron_l_24.svg';
-import { ReactComponent as CloseIcon } from '../../assets/icons/x_24.svg';
+import { ReactComponent as CloseIcon } from '../../assets/icons/x_24_2.svg';
 
 const HeaderSub = ({ isShevron = true, isClose = true, text, onClickShevron, onClickClose }) => {
   const navigate = useNavigate();

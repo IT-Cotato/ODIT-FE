@@ -38,6 +38,7 @@ const StyledButton = styled.button`
   border: none;
   font-size: 1rem;
   font-weight: 700;
+  cursor: pointer;
 
   > svg {
     position: absolute;
