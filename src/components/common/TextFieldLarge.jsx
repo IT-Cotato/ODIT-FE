@@ -36,6 +36,17 @@ const StyledTextField = styled(TextField)(({ theme, outlineColor }) => ({
   },
 }));
 
+/**
+ * TextFieldLarge component
+ *
+ * @param {boolean} outlined - Determines if the text field should have an outline. Default is true.
+ * @param {boolean} hasSearchAdornment - Determines if the text field should have a search icon adornment. Default is false.
+ * @param {boolean} hasClearAdornment - Determines if the text field should have a clear icon adornment. Default is false.
+ * @param {string} placeholder - Placeholder text for the text field. Default is an empty string.
+ * @param {string} value - Value of the text field. Default is an empty string.
+ * @param {string} outlineColor - Color of the outline.
+ * @param {function} onChange - Function to call when the value changes. Default is an empty function.
+ */
 const TextFieldLarge = ({
   outlined = true,
   hasSearchAdornment = false,
