@@ -32,6 +32,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   height: ${HEADER_HEIGHT};
   padding: 0.5rem 0;
+  box-sizing: border-box;
 
   > button {
     cursor: pointer;
