@@ -1,20 +1,34 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import LoginButton from '../../components/Login/LoginButton';
+import axiosInstance from '../../apis/instance';
+import { ReactComponent as Logo } from '../../assets/icons/logo_medium.svg';
 
 const SOCIAL_LOGIN_LIST = ['kakao'];
 
 const Login = () => {
+  const handleKakaoLogin = async () => {
+    try {
+      const res = await axiosInstance.get('api/auth/kakao');
+      console.log(res);
+    } catch {
+      console.error('Failed to login with Kakao');
+    }
+  };
+
   const renderLogo = () => {
-    // TODO: 서비스 로고 추가 예정
-    return <LogoContainer>ODIT</LogoContainer>;
+    return (
+      <LogoContainer>
+        <Logo />
+      </LogoContainer>
+    );
   };
 
   const renderLoginButtons = () => {
     return (
       <ButtonContatiner>
         {SOCIAL_LOGIN_LIST.map((social) => (
-          <LoginButton social={social} />
+          <LoginButton social={social} onClick={handleKakaoLogin} />
         ))}
       </ButtonContatiner>
     );
