@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import AuthGuard from '../components/common/AuthGuard';
+import loginRouter from './loginRouter';
 
 const AsyncHome = React.lazy(() => import('../pages/Home/Home'));
 const AsyncLogin = React.lazy(() => import('../pages/Login/Login'));
@@ -16,6 +17,7 @@ const ROUTE_INFO = [
     path: '/login',
     element: <AsyncLogin />,
     isAuthRequired: false,
+    children: loginRouter,
   },
   {
     path: '/register',
@@ -25,9 +27,10 @@ const ROUTE_INFO = [
 ];
 
 const router = createBrowserRouter(
-  ROUTE_INFO.map(({ path, element, isAuthRequired }) => ({
+  ROUTE_INFO.map(({ path, element, isAuthRequired, children }) => ({
     path,
     element: isAuthRequired ? <AuthGuard>{element}</AuthGuard> : element,
+    children,
   })),
 );
 
