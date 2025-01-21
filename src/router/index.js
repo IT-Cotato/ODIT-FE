@@ -6,6 +6,7 @@ import loginRouter from './loginRouter';
 const AsyncHome = React.lazy(() => import('../pages/Home/Home'));
 const AsyncLogin = React.lazy(() => import('../pages/Login/Login'));
 const AsyncRegister = React.lazy(() => import('../pages/Register/Register'));
+// const AsyncLink = React.lazy(() => import('../pages/Home/Link'));
 
 const ROUTE_INFO = [
   {
@@ -21,6 +22,7 @@ const ROUTE_INFO = [
   },
   {
     path: '/register',
+
     element: <AsyncRegister />,
     isAuthRequired: true,
   },

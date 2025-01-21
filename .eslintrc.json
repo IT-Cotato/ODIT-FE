@@ -26,6 +26,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "import/no-extraneous-dependencies": [
       "error",
       { "devDependencies": true, "optionalDependencies": false, "peerDependencies": false }
