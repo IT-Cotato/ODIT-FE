@@ -1,14 +1,14 @@
 /**
  * AuthGuard component
  */
-const AuthGuard = ({ childrend }) => {
+const AuthGuard = ({ children }) => {
   const token = localStorage.getItem('token');
 
   if (!token) {
     window.location.href = '/login';
   }
 
-  return childrend;
+  return children;
 };
 
 export default AuthGuard;
