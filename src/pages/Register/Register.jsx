@@ -111,7 +111,7 @@ const Register = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: `calc(100vh - ${HEADER_HEIGHT})`,
+          height: `calc(100% - ${HEADER_HEIGHT})`,
           padding: '1.5rem',
           boxSizing: 'border-box',
         }}
