@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import LoginButton from '../../components/Login/LoginButton';
-import axiosInstance from '../../apis/instance';
 import { ReactComponent as Logo } from '../../assets/icons/logo_medium.svg';
 
 const SOCIAL_LOGIN_LIST = ['kakao'];
 
 const Login = () => {
-  const handleKakaoLogin = async () => {
+  const handleKakaoLogin = () => {
     try {
-      const res = await axiosInstance.get('api/auth/kakao');
-      console.log(res);
+      const clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
+      const redirectURI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+      const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectURI}&response_type=code`;
+
+      window.location.href = kakaoURL;
     } catch {
       console.error('Failed to login with Kakao');
     }
