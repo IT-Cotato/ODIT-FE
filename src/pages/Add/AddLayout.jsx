@@ -1,11 +1,15 @@
 import React from 'react';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 import HeaderSub from '../../components/common/HeaderSub';
 
 const AddLayout = () => {
+  const location = useLocation();
+
+  const isHeader = !location.pathname.includes('loading');
+
   return (
     <>
-      <HeaderSub />
+      {isHeader && <HeaderSub />}
       <Outlet />
     </>
   );
