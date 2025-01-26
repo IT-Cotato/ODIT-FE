@@ -4,6 +4,7 @@ import Marquee from 'react-fast-marquee';
 import styled from '@emotion/styled';
 import { SyncLoader } from 'react-spinners';
 import { useTheme } from '@emotion/react';
+import { useLocation, useNavigate } from 'react-router';
 import { ReactComponent as Coffee } from '../../../assets/icons/coffee.svg';
 import { ReactComponent as Pizza } from '../../../assets/icons/pizza.svg';
 import { ReactComponent as Cake } from '../../../assets/icons/cake.svg';
@@ -36,6 +37,10 @@ const MARQUEE_LIST_BOTTOM = [
 const MARQUEE_SPEED = 100;
 
 const AddPlaceLoading = () => {
+  const location = useLocation();
+
+  const navigate = useNavigate();
+
   const theme = useTheme();
 
   const renderMarquee = () => {
@@ -99,6 +104,12 @@ const AddPlaceLoading = () => {
       </Box>
     );
   };
+
+  React.useEffect(() => {
+    if (!location.state) {
+      navigate('/add/place', { state: { fail: true } });
+    }
+  }, [location.state]);
 
   return (
     <Box

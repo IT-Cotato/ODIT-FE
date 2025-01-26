@@ -1,12 +1,18 @@
 import React from 'react';
 import { Stack, Typography, Box } from '@mui/material';
 import { useTheme } from '@emotion/react';
+import { Link, useLocation, useNavigate } from 'react-router';
 import FullContainer from '../../../components/common/FullContainer';
 import TextFieldLarge from '../../../components/common/TextFieldLarge';
 import ButtonLarge from '../../../components/common/ButtonLarge';
 
 const AddPlaceExpotLink = () => {
   const [link, setLink] = React.useState('');
+  const [isFailed, setIsFailed] = React.useState(false);
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
 
   const theme = useTheme();
 
@@ -14,7 +20,9 @@ const AddPlaceExpotLink = () => {
     setLink(changedText);
   };
 
-  const handleExportButton = () => {};
+  const handleExportButton = () => {
+    navigate('/add/loading', { state: { link } });
+  };
 
   const renderInpuLink = () => {
     return (
@@ -59,7 +67,16 @@ const AddPlaceExpotLink = () => {
                 color: theme.color.black[400],
               }}
             >
-              링크 없이 저장하고 싶으신가요?
+              링크 없이 저장하고 싶으신가요? &nbsp;
+              <Link
+                to="/add/place"
+                style={{
+                  textDecoration: 'none',
+                  color: theme.color.main[50],
+                }}
+              >
+                직접 추가하기
+              </Link>
             </Typography>
           </Box>
         </Box>
@@ -70,10 +87,16 @@ const AddPlaceExpotLink = () => {
   const renderExportButton = () => {
     return (
       <ButtonLarge disabled={link === ''} color={link ? 'enabled' : 'disabled'} onClick={handleExportButton}>
-        시작하기
+        정보 추출하기
       </ButtonLarge>
     );
   };
+
+  React.useEffect(() => {
+    if (location.state?.fail) {
+      setIsFailed(true);
+    }
+  }, [location.state]);
 
   return (
     <FullContainer>

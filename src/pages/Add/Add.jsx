@@ -11,7 +11,7 @@ const LINK_LIST = [
   {
     icon: <PlaceIcon />,
     text: '장소 추가하기',
-    link: '/add/place',
+    link: '/add/export',
   },
   {
     icon: <EventIcon />,
