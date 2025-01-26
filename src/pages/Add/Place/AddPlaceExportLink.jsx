@@ -6,7 +6,7 @@ import FullContainer from '../../../components/common/FullContainer';
 import TextFieldLarge from '../../../components/common/TextFieldLarge';
 import ButtonLarge from '../../../components/common/ButtonLarge';
 
-const AddPlaceExpotLink = () => {
+const AddPlaceExportLink = () => {
   const [link, setLink] = React.useState('');
   const [isFailed, setIsFailed] = React.useState(false);
 
@@ -69,7 +69,7 @@ const AddPlaceExpotLink = () => {
             >
               링크 없이 저장하고 싶으신가요? &nbsp;
               <Link
-                to="/add/place"
+                to="/add/search"
                 style={{
                   textDecoration: 'none',
                   color: theme.color.main[50],
@@ -106,4 +106,4 @@ const AddPlaceExpotLink = () => {
   );
 };
 
-export default AddPlaceExpotLink;
+export default AddPlaceExportLink;

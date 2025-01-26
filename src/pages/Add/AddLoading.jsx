@@ -5,17 +5,17 @@ import styled from '@emotion/styled';
 import { SyncLoader } from 'react-spinners';
 import { useTheme } from '@emotion/react';
 import { useLocation, useNavigate } from 'react-router';
-import { ReactComponent as Coffee } from '../../../assets/icons/coffee.svg';
-import { ReactComponent as Pizza } from '../../../assets/icons/pizza.svg';
-import { ReactComponent as Cake } from '../../../assets/icons/cake.svg';
-import { ReactComponent as Festival } from '../../../assets/icons/festival.svg';
-import { ReactComponent as Culture } from '../../../assets/icons/culture.svg';
-import { ReactComponent as Exhibition } from '../../../assets/icons/exhibition.svg';
-import { ReactComponent as Noodle } from '../../../assets/icons/noodle.svg';
-import { ReactComponent as Home } from '../../../assets/icons/home.svg';
-import { ReactComponent as Store } from '../../../assets/icons/store.svg';
-import { ReactComponent as Theater } from '../../../assets/icons/theater.svg';
-import { ReactComponent as Rice } from '../../../assets/icons/rice.svg';
+import { ReactComponent as Coffee } from '../../assets/icons/coffee.svg';
+import { ReactComponent as Pizza } from '../../assets/icons/pizza.svg';
+import { ReactComponent as Cake } from '../../assets/icons/cake.svg';
+import { ReactComponent as Festival } from '../../assets/icons/festival.svg';
+import { ReactComponent as Culture } from '../../assets/icons/culture.svg';
+import { ReactComponent as Exhibition } from '../../assets/icons/exhibition.svg';
+import { ReactComponent as Noodle } from '../../assets/icons/noodle.svg';
+import { ReactComponent as Home } from '../../assets/icons/home.svg';
+import { ReactComponent as Store } from '../../assets/icons/store.svg';
+import { ReactComponent as Theater } from '../../assets/icons/theater.svg';
+import { ReactComponent as Rice } from '../../assets/icons/rice.svg';
 
 const MARQUEE_LIST_TOP = [
   { key: 'coffee-0', component: <Coffee /> },
@@ -36,7 +36,7 @@ const MARQUEE_LIST_BOTTOM = [
 
 const MARQUEE_SPEED = 100;
 
-const AddPlaceLoading = () => {
+const AddLoading = () => {
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -128,7 +128,7 @@ const AddPlaceLoading = () => {
   );
 };
 
-export default AddPlaceLoading;
+export default AddLoading;
 
 const IconBackground = styled.div`
   display: flex;
