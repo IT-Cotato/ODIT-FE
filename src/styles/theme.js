@@ -34,8 +34,13 @@ const color = {
   },
 };
 
+const typography = {
+  fontFamily: 'Pretendard',
+};
+
 const theme = {
   color,
+  typography,
 };
 
 export default theme;
