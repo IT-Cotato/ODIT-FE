@@ -3,6 +3,17 @@ import { Global } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
+/**
+ * SwipeDrawer Component
+ * A reusable and customizable swipeable bottom drawer component.
+ *
+ * @prop {boolean} open - Initial open state of the drawer. Default is `false`.
+ * @prop {boolean} full - Determines if the drawer takes up the full height. Default is `false`.
+ * @prop {boolean} modal - Controls the presence of a modal backdrop. Default is `true`.
+ * @prop {boolean} disableClose - Prevents the drawer from being closed. Default is `false`.
+ * @prop {string} height - The height of the drawer content if `full` is `false`. Default is `'fit-content'`.
+ * @prop {React.ReactNode} children - The content to be rendered inside the drawer.
+ */
 const SwipeDrawer = ({
   open = false,
   full = false,
