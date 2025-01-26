@@ -19,11 +19,12 @@ const StyledButtonLarge = styled(Button)(({ style }) => ({
 /**
  * ButtonLarge component
  *
+ * @param {boolean} disabled - If true, the button is disabled. Default is false.
  * @param {React.ReactNode} children - The content of the button.
  * @param {string} color - The color style of the button. Default is an empty string.
  * @param {function} onClick - Function to call when the button is clicked. Default is an empty function.
  */
-const ButtonLarge = ({ children, color = '', onClick = () => {} }) => {
+const ButtonLarge = ({ disabled = false, children, color = '', onClick = () => {} }) => {
   const theme = useTheme();
 
   const getButtonStyle = () => {
@@ -50,7 +51,7 @@ const ButtonLarge = ({ children, color = '', onClick = () => {} }) => {
   };
 
   return (
-    <StyledButtonLarge disabled={color === 'disabled'} style={getButtonStyle()} onClick={onClick}>
+    <StyledButtonLarge disabled={disabled} style={getButtonStyle()} onClick={onClick}>
       {children}
     </StyledButtonLarge>
   );
