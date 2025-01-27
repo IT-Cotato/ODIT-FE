@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import { useNavigate } from 'react-router';
 import TextFieldLarge from '../../../components/common/TextFieldLarge';
 import KakaoPlacesSearch from '../../../components/common/KakaoPlacesSearch';
 import useDebounce from '../../../hooks/useDebounce';
@@ -13,6 +14,8 @@ const AddPlaceSeach = () => {
   const [checkedPlaces, setCheckedPlaces] = React.useState([]);
 
   const debouncedSearchText = useDebounce({ value: searchText, delay: 500 });
+
+  const navigate = useNavigate();
 
   const handleSearchTextChange = (changedText) => {
     setSearchText(changedText);
@@ -31,6 +34,14 @@ const AddPlaceSeach = () => {
     } else {
       setCheckedPlaces(checkedPlaces.filter((checkedPlace) => checkedPlace.place_url !== place.place_url));
     }
+  };
+
+  const handleNextButton = () => {
+    navigate('/add/place/0', {
+      state: {
+        places: checkedPlaces,
+      },
+    });
   };
 
   return (
@@ -54,7 +65,7 @@ const AddPlaceSeach = () => {
           />
           <AddSearchList searchResult={searchResult} checkedPlaces={checkedPlaces} onClick={handleCheckPlace} />
         </Box>
-        <ButtonLarge disabled={checkedPlaces.length === 0} color="enabled">
+        <ButtonLarge disabled={checkedPlaces.length === 0} color="enabled" onClick={handleNextButton}>
           다음으로
         </ButtonLarge>
       </FullContainer>
