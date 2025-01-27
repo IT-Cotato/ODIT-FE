@@ -28,26 +28,27 @@ const ButtonLarge = ({ disabled = false, children, color = '', onClick = () => {
   const theme = useTheme();
 
   const getButtonStyle = () => {
-    switch (color) {
-      case 'enabled':
-        return {
-          backgroundColor: theme.color.main[100],
-          color: theme.color.black[0],
-          borderColor: theme.color.main[100],
-        };
-      case 'disabled':
-        return {
-          backgroundColor: theme.color.black[100],
-          color: theme.color.black[400],
-          borderColor: theme.color.black[100],
-        };
-      default:
-        return {
-          backgroundColor: theme.color.black[0],
-          color: theme.color.black[600],
-          borderColor: theme.color.black[100],
-        };
+    if (disabled) {
+      return {
+        backgroundColor: theme.color.black[100],
+        color: theme.color.black[400],
+        borderColor: theme.color.black[100],
+      };
     }
+
+    if (color === 'enabled') {
+      return {
+        backgroundColor: theme.color.main[100],
+        color: theme.color.black[0],
+        borderColor: theme.color.main[100],
+      };
+    }
+
+    return {
+      backgroundColor: theme.color.black[0],
+      color: theme.color.black[600],
+      borderColor: theme.color.black[100],
+    };
   };
 
   return (

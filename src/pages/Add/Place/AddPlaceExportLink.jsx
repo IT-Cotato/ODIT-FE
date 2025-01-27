@@ -86,7 +86,7 @@ const AddPlaceExportLink = () => {
 
   const renderExportButton = () => {
     return (
-      <ButtonLarge disabled={link === ''} color={link ? 'enabled' : 'disabled'} onClick={handleExportButton}>
+      <ButtonLarge disabled={link === ''} color="enabled" onClick={handleExportButton}>
         정보 추출하기
       </ButtonLarge>
     );
