@@ -1,11 +1,14 @@
 import React from 'react';
 import { Box, Stack, Typography, useTheme } from '@mui/material';
+import { useNavigate } from 'react-router';
 import HeaderSub from '../../components/common/HeaderSub';
 import TextFieldLarge from '../../components/common/TextFieldLarge';
 import { HEADER_HEIGHT } from '../../constant';
 import ButtonLarge from '../../components/common/ButtonLarge';
 import useDebounce from '../../hooks/useDebounce';
 import nicknameValidator from '../../utils/nicknameValidator';
+import { postUserNickname } from '../../apis/user/index';
+import { useSnackbar } from '../../hooks/useSnackbark';
 
 const Register = () => {
   const [isApprovedNickname, setIsApprovedNickname] = React.useState(undefined);
@@ -16,11 +19,26 @@ const Register = () => {
 
   const theme = useTheme();
 
+  const navigate = useNavigate();
+
+  const { showSnackbar, SnackbarComponent } = useSnackbar();
+
   const handleNicknameChange = (changedText) => {
     setNickname(changedText);
   };
 
-  const handleRegisterButton = () => {};
+  const handleRegisterButton = async () => {
+    if (isApprovedNickname && nickname === debouncedNickname) {
+      const { data } = await postUserNickname(debouncedNickname);
+
+      if (data) {
+        localStorage.setItem('role', data.role);
+        navigate('/');
+      }
+    }
+
+    showSnackbar({ message: '등록에 실패했습니다.' });
+  };
 
   const getTextFieldOutlineColor = () => {
     if (isApprovedNickname) {
@@ -97,9 +115,14 @@ const Register = () => {
       return;
     }
 
-    const { isValid, message } = nicknameValidator(debouncedNickname);
-    setIsApprovedNickname(isValid);
-    setFailedMessage(message);
+    const validateNickname = async () => {
+      const { isValid, message } = await nicknameValidator(debouncedNickname);
+
+      setIsApprovedNickname(isValid);
+      setFailedMessage(message);
+    };
+
+    validateNickname();
   }, [debouncedNickname]);
 
   return (
@@ -119,6 +142,7 @@ const Register = () => {
         {renderNicknameInput()}
         {renderRegisterButton()}
       </Box>
+      <SnackbarComponent />
     </>
   );
 };
