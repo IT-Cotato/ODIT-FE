@@ -1,11 +1,19 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useLocation, useNavigate } from 'react-router';
 import LoginButton from '../../components/Login/LoginButton';
 import { ReactComponent as Logo } from '../../assets/icons/logo_medium.svg';
+import { useSnackbar } from '../../hooks/useSnackbark';
 
 const SOCIAL_LOGIN_LIST = ['kakao'];
 
 const Login = () => {
+  const location = useLocation();
+
+  const navigate = useNavigate();
+
+  const { showSnackbar, SnackbarComponent } = useSnackbar();
+
   const handleKakaoLogin = () => {
     try {
       const clientId = process.env.REACT_APP_KAKAO_CLIENT_ID;
@@ -14,7 +22,7 @@ const Login = () => {
 
       window.location.href = kakaoURL;
     } catch {
-      console.error('Failed to login with Kakao');
+      navigate('.', { replace: true, state: { fail: true } });
     }
   };
 
@@ -36,11 +44,21 @@ const Login = () => {
     );
   };
 
+  React.useEffect(() => {
+    if (location.state?.fail) {
+      showSnackbar('로그인에 실패했습니다. 다시 시도해주세요.', 'error');
+      navigate('.', { replace: true, state: null });
+    }
+  }, [location.state]);
+
   return (
-    <Wrapper>
-      {renderLogo()}
-      {renderLoginButtons()}
-    </Wrapper>
+    <>
+      <Wrapper>
+        {renderLogo()}
+        {renderLoginButtons()}
+      </Wrapper>
+      <SnackbarComponent />
+    </>
   );
 };
 
