@@ -10,6 +10,7 @@ import ButtonLarge from '../../../components/common/ButtonLarge';
 const AddPlaceSeach = () => {
   const [searchText, setSearchText] = React.useState('');
   const [searchResult, setSearchResult] = React.useState([]);
+  const [checkedPlaces, setCheckedPlaces] = React.useState([]);
 
   const debouncedSearchText = useDebounce({ value: searchText, delay: 500 });
 
@@ -19,6 +20,17 @@ const AddPlaceSeach = () => {
 
   const handleSearchPlace = (data) => {
     setSearchResult(data);
+    setCheckedPlaces([]);
+  };
+
+  const handleCheckPlace = (place) => {
+    const index = checkedPlaces.findIndex((checkedPlace) => checkedPlace.place_url === place.place_url);
+
+    if (index === -1) {
+      setCheckedPlaces([...checkedPlaces, place]);
+    } else {
+      setCheckedPlaces(checkedPlaces.filter((checkedPlace) => checkedPlace.place_url !== place.place_url));
+    }
   };
 
   return (
@@ -31,6 +43,7 @@ const AddPlaceSeach = () => {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '1.5rem',
+            height: 'inherit',
           }}
         >
           <TextFieldLarge
@@ -39,11 +52,13 @@ const AddPlaceSeach = () => {
             value={searchText}
             onChange={handleSearchTextChange}
           />
-          <AddSearchList searchResult={searchResult} />
+          <AddSearchList searchResult={searchResult} checkedPlaces={checkedPlaces} onClick={handleCheckPlace} />
         </Box>
-        <ButtonLarge color="disabled">다음으로</ButtonLarge>
+        <ButtonLarge disabled={checkedPlaces.length === 0} color="enabled">
+          다음으로
+        </ButtonLarge>
       </FullContainer>
-      <AddKakaoSearchList keyword={debouncedSearchText} placeSearchCallback={handleSearchPlace} />
+      <KakaoPlacesSearch keyword={debouncedSearchText} placeSearchCallback={handleSearchPlace} />
     </>
   );
 };
