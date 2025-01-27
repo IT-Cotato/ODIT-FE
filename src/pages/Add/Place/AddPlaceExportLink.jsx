@@ -1,18 +1,15 @@
 import React from 'react';
 import { Stack, Typography, Box } from '@mui/material';
 import { useTheme } from '@emotion/react';
-import { Link, useLocation, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import FullContainer from '../../../components/common/FullContainer';
 import TextFieldLarge from '../../../components/common/TextFieldLarge';
 import ButtonLarge from '../../../components/common/ButtonLarge';
 
 const AddPlaceExportLink = () => {
   const [link, setLink] = React.useState('');
-  const [isFailed, setIsFailed] = React.useState(false);
 
   const navigate = useNavigate();
-
-  const location = useLocation();
 
   const theme = useTheme();
 
@@ -91,12 +88,6 @@ const AddPlaceExportLink = () => {
       </ButtonLarge>
     );
   };
-
-  React.useEffect(() => {
-    if (location.state?.fail) {
-      setIsFailed(true);
-    }
-  }, [location.state]);
 
   return (
     <FullContainer>
