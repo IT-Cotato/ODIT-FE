@@ -11,6 +11,7 @@ const CheckBox = ({ checked, onChange }) => {
       onChange={onChange}
       sx={{
         color: theme.color.black[200],
+        padding: 0,
 
         '& .MuiSvgIcon-root': {
           width: '2rem',
