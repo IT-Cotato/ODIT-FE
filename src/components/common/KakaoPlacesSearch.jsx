@@ -8,7 +8,7 @@ import React from 'react';
  * @param {*} placeSearchCallback - callback function to search place
  * @returns
  */
-const AddKakaoSearchList = ({ keyword, placeSearchCallback }) => {
+const KakaoPlacesSearch = ({ keyword, placeSearchCallback }) => {
   const keywordSearch = React.useRef();
 
   React.useEffect(() => {
@@ -30,4 +30,4 @@ const AddKakaoSearchList = ({ keyword, placeSearchCallback }) => {
   return null;
 };
 
-export default AddKakaoSearchList;
+export default KakaoPlacesSearch;

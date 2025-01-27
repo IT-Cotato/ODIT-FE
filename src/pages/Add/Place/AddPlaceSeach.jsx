@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import TextFieldLarge from '../../../components/common/TextFieldLarge';
-import AddKakaoSearchList from '../../../components/Add/AddKakaoSearchList';
+import KakaoPlacesSearch from '../../../components/common/KakaoPlacesSearch';
 import useDebounce from '../../../hooks/useDebounce';
 import AddSearchList from '../../../components/Add/AddSearchList';
 import FullContainer from '../../../components/common/FullContainer';
