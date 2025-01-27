@@ -20,7 +20,7 @@ const addRouter = [
     element: <AsyncAddLoading />,
   },
   {
-    path: 'place',
+    path: 'place/:index',
     element: <AsyncAddPlace />,
   },
   {
