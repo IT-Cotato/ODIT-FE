@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { getLogin } from '../../apis/auth';
-import AuthGuard from '../../components/common/AuthGuard';
 
 const LoginKakao = () => {
   const navigate = useNavigate();
@@ -11,9 +10,23 @@ const LoginKakao = () => {
   React.useEffect(() => {
     const login = async () => {
       try {
-        const data = await getLogin(AuthGuard);
+        const res = await getLogin(authorizedCode);
+
+        if (res?.data) {
+          const token = res.headers.authorization;
+
+          localStorage.setItem('token', token);
+
+          if (res.data.data.role === 'GUEST') {
+            navigate('/register');
+          } else {
+            navigate('/');
+          }
+        } else {
+          throw new Error(res?.error);
+        }
       } catch {
-        navigate('login', {
+        navigate('/login', {
           state: {
             fail: true,
           },
@@ -23,10 +36,6 @@ const LoginKakao = () => {
 
     login();
   }, []);
-
-  if (!authorizedCode) {
-    // navigate('/login', search: );
-  }
 
   return <div>로그인중...</div>;
 };
