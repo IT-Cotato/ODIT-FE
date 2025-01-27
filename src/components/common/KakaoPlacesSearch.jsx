@@ -12,7 +12,7 @@ const KakaoPlacesSearch = ({ keyword, placeSearchCallback }) => {
   const keywordSearch = React.useRef();
 
   React.useEffect(() => {
-    if (window.kakao && window.kakao.maps) {
+    if (window?.kakao?.maps) {
       window.kakao.maps.load(() => {
         const ps = new window.kakao.maps.services.Places();
 
@@ -25,7 +25,7 @@ const KakaoPlacesSearch = ({ keyword, placeSearchCallback }) => {
     if (keywordSearch.current) {
       keywordSearch.current(keyword, placeSearchCallback);
     }
-  }, [keyword]);
+  }, [keyword, keywordSearch.current]);
 
   return null;
 };
