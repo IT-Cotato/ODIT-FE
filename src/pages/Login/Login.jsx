@@ -46,7 +46,7 @@ const Login = () => {
 
   React.useEffect(() => {
     if (location.state?.fail) {
-      showSnackbar('로그인에 실패했습니다. 다시 시도해주세요.', 'error');
+      showSnackbar({ message: '로그인에 실패했습니다. 다시 시도해주세요.' });
       navigate('.', { replace: true, state: null });
     }
   }, [location.state]);

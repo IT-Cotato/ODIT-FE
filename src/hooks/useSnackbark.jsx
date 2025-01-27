@@ -1,7 +1,7 @@
 import React from 'react';
 import { Snackbar, Alert, Slide } from '@mui/material';
 
-const DEFAULT_DURATION = 1200;
+const DEFAULT_DURATION = 2000;
 
 export const useSnackbar = () => {
   const [snackbar, setSnackbar] = React.useState({
@@ -11,7 +11,7 @@ export const useSnackbar = () => {
     duration: DEFAULT_DURATION,
   });
 
-  const showSnackbar = (message, type = 'error', duration = DEFAULT_DURATION) => {
+  const showSnackbar = ({ message, type = 'error', duration = DEFAULT_DURATION }) => {
     setSnackbar({ open: true, message, type, duration });
     // setTimeout(() => {
     //   setSnackbar({ open: false, message: '', type: 'error' });
