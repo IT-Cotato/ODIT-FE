@@ -7,6 +7,7 @@ import addRouter from './addRouter';
 const AsyncHome = React.lazy(() => import('../pages/Home/Home'));
 const AsyncLogin = React.lazy(() => import('../pages/Login/Login'));
 const AsyncRegister = React.lazy(() => import('../pages/Register/Register'));
+const AsyncLoginKakao = React.lazy(() => import('../pages/Login/LoginKakao'));
 const AsyncAdd = React.lazy(() => import('../pages/Add/AddLayout'));
 
 const ROUTE_INFO = [
@@ -15,11 +16,16 @@ const ROUTE_INFO = [
     element: <AsyncHome />,
     isAuthRequired: true,
   },
+
   {
     path: '/login',
     element: <AsyncLogin />,
     isAuthRequired: false,
-    children: loginRouter,
+  },
+  {
+    path: '/login/kakao',
+    element: <AsyncLoginKakao />,
+    isAuthRequired: false,
   },
   {
     path: '/register',
