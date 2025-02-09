@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import AuthGuard from '../components/common/AuthGuard';
-import loginRouter from './loginRouter';
 import addRouter from './addRouter';
 
 const AsyncHome = React.lazy(() => import('../pages/Home/Home'));
