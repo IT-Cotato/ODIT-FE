@@ -2,6 +2,7 @@ import React from 'react';
 import { Global } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import useSwipeDrawerOpenState from '../../stores/useSwipeDrawerOpenState';
 
 /**
  * SwipeDrawer Component
@@ -22,33 +23,52 @@ const SwipeDrawer = ({
   height = 'fit-content',
   children,
 }) => {
-  const [isOpen, setIsOpen] = React.useState(open);
+  // const [openState, setOpenState] = React.useState(open ? 'open' : 'closed');
+
+  const { swipeDrawerOpenState: openState, setSwipeDrawerOpenState: setOpenState } = useSwipeDrawerOpenState();
 
   const drawerBleeding = 32;
 
-  const toggleDrawer = (newOpen) => () => {
+  const toggleDrawer = (currentState) => () => {
     if (disableClose) {
       return;
     }
 
-    setIsOpen(newOpen);
+    if (currentState === 'open') {
+      setOpenState('full');
+    } else if (currentState === 'full') {
+      setOpenState('open');
+    } else {
+      setOpenState('open');
+    }
   };
+
+  React.useEffect(() => {
+    return () => setOpenState('open');
+  }, []);
 
   return (
     <>
       <Global
         styles={{
+          '.MuiDrawer-root': {
+            pointerEvents: modal ? 'auto' : 'none',
+          },
+
           '.MuiDrawer-root > .MuiPaper-root': {
-            height: `calc(${full ? `100%` : height} - ${drawerBleeding}px)`,
+            transition: 'height 0.3s ease-in-out, max-height 0.3s ease-in-out !important',
+            height: openState === 'full' ? `calc(100% - ${drawerBleeding}px)` : 'fit-content',
+            maxHeight: openState === 'full' ? '100%' : '14rem',
             overflow: 'visible',
+            pointerEvents: 'auto',
           },
         }}
       />
       <SwipeableDrawer
         anchor="bottom"
-        open={isOpen}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
+        open={openState !== 'closed'}
+        onClose={() => !disableClose && setOpenState('closed')}
+        onOpen={() => setOpenState('open')}
         swipeAreaWidth={drawerBleeding}
         disableSwipeToisOpen={false}
         ModalProps={{
@@ -60,11 +80,13 @@ const SwipeDrawer = ({
               ? {}
               : {
                   backgroundColor: 'transparent',
+                  pointerEvents: 'none',
                 },
           },
         }}
       >
         <StyledBox
+          onClick={toggleDrawer(openState)}
           sx={{
             position: 'absolute',
             top: -drawerBleeding,
@@ -75,6 +97,7 @@ const SwipeDrawer = ({
             left: 0,
             width: '100%',
             height: drawerBleeding,
+            pointerEvents: 'auto',
           }}
         >
           <Puller />
