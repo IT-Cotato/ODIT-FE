@@ -2,6 +2,13 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { HEADER_HEIGHT } from '../../constant';
 
+/**
+ * FullContainer component
+ * Style for full flex colomn container
+ * Height is 100% - HEADER_HEIGHT
+ * @param {React.node} param0
+ * @returns
+ */
 const FullContainer = ({ children }) => {
   return (
     <Box

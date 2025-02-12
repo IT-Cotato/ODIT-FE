@@ -2,6 +2,12 @@ import React from 'react';
 import { Checkbox } from '@mui/material';
 import { useTheme } from '@emotion/react';
 
+/**
+ * CheckBox component
+ * @param {boolean} checked - checked state
+ * @param {function} onChange - change event for the checkbox
+ * @returns
+ */
 const CheckBox = ({ checked, onChange }) => {
   const theme = useTheme();
 
