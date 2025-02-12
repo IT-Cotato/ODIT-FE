@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import HeaderSub from '../../components/common/HeaderSub';
-// http://localhost:3000/
+
 const Link = () => {
   const [link, setLink] = useState('');
   const onChange = (e) => {
