@@ -4,8 +4,10 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 import FullContainer from '../../../components/common/FullContainer';
 import TextFieldLarge from '../../../components/common/TextFieldLarge';
 import ButtonLarge from '../../../components/common/ButtonLarge';
+import { postPlaces } from '../../../apis/places';
 
 const AddPlace = () => {
+  const [memo, setMemo] = React.useState('');
   const [placeList, setPlaceList] = React.useState([]);
 
   const location = useLocation();
@@ -21,17 +23,32 @@ const AddPlace = () => {
     address_name: addressName,
   } = placeList.at(numericIndex) ?? {};
 
-  const handleNextButton = () => {
-    navigate(`/add/place/${numericIndex + 1}`);
+  const handleMemoChange = (changedMemo) => {
+    setMemo(changedMemo);
+
+    const newPlaceList = [...placeList];
+    newPlaceList[numericIndex].memo = changedMemo;
+    setPlaceList(newPlaceList);
   };
 
-  const handleSubmitButton = () => {};
+  const handleNextButton = () => {
+    postPlaces(placeList[numericIndex]).then(() => {
+      navigate(`/add/place/${numericIndex + 1}`);
+    });
+  };
+
+  const handleSubmitButton = () => {
+    postPlaces(placeList[numericIndex]).then(() => {
+      navigate('/');
+    });
+  };
 
   React.useEffect(() => {
     if (location.state?.places) {
-      setPlaceList([...location.state.places]);
+      const newPlaces = location.state.places.map((place) => ({ ...place, memo: '' }));
+      setPlaceList(newPlaces);
     } else {
-      navigate('/add/export');
+      navigate('/add/export?type=place');
     }
   }, []);
 
@@ -47,7 +64,12 @@ const AddPlace = () => {
         <TextFieldLarge disabled label="장소명" value={placeName} />
         <TextFieldLarge disabled label="카테고리" value={categoryGroupName} />
         <TextFieldLarge disabled label="위치" value={addressName} />
-        <TextFieldLarge label="메모(선택)" placeholder="메모를 입력해 주세요" />
+        <TextFieldLarge
+          label="메모(선택)"
+          value={memo}
+          placeholder="메모를 입력해 주세요"
+          onChange={handleMemoChange}
+        />
       </Box>
       {numericIndex < placeList.length - 1 ? (
         <ButtonLarge color="enabled" onClick={handleNextButton}>
