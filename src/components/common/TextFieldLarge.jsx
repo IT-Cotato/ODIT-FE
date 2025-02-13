@@ -30,6 +30,10 @@ const StyledTextField = styled(TextField)(({ theme, outlineColor, borderRadius =
     borderColor: `${outlineColor} !important`,
   },
 
+  '& .MuiInput-root.Mui-focused:after': {
+    borderBottomColor: `${outlineColor}`,
+  },
+
   '& .MuiOutlinedInput-root': {
     '&.Mui-focused fieldset': {
       borderColor: `${outlineColor}`,
