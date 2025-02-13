@@ -50,6 +50,30 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
     }
   };
 
+  const handleFilterCategories = async (categories) => {
+    await mutate();
+
+    if (categories.includes('ALL')) {
+      return;
+    }
+
+    const newPlaces = places.reduce((acc, cur) => {
+      if (categories.includes(cur.subCategory)) {
+        return [...acc, cur];
+      }
+
+      return acc;
+    }, []);
+
+    mutate(
+      {
+        ...data,
+        data: newPlaces,
+      },
+      false,
+    );
+  };
+
   const handleVisitPlace = async (place) => {
     const newPlaces = places.map((p) => {
       if (p.commonPlaceId === place.commonPlaceId) {
@@ -67,6 +91,7 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
     isLoading,
     places,
     handleSearchKeyword,
+    handleFilterCategories,
     handleVisitPlace,
   };
 };

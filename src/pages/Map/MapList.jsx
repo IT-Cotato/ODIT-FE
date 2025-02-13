@@ -12,7 +12,7 @@ const MapList = () => {
 
   const { isBottomDrawerFullOpen } = useIsBottomDrawerFullOpenStore();
 
-  const { places } = usePlaces();
+  const { places, handleFilterCategories } = usePlaces();
 
   const handleCheckedCategoriesChange = (code) => {
     if (code === 'ALL' && !checkedCategories.includes(code)) {
@@ -27,6 +27,10 @@ const MapList = () => {
       setCheckedCategories([...checkedCategories, code]);
     }
   };
+
+  React.useEffect(() => {
+    handleFilterCategories(checkedCategories);
+  }, [checkedCategories]);
 
   return (
     <Box
