@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Fade, Stack } from '@mui/material';
+import { Box, Fade, Stack, Typography } from '@mui/material';
 import TextFieldLarge from '../../components/common/TextFieldLarge';
 import usePlaces from '../../hooks/usePlaces';
 import MapListItem from '../../components/Map/MapListItem';
@@ -7,6 +7,7 @@ import useIsBottomDrawerFullOpenStore from '../../stores/useIsBottomDrawerFullOp
 import MapListCategoryFilter from './MapListCategoryFilter';
 import { PLACE_CATEGORY_CODE_WITH_ALL_MAP } from '../../constant';
 import useDebounce from '../../hooks/useDebounce';
+import { ReactComponent as PlaceEmpty } from '../../assets/icons/place_empty.svg';
 
 const MapList = () => {
   const [checkedCategories, setCheckedCategories] = React.useState(['ALL']);
@@ -34,6 +35,46 @@ const MapList = () => {
     } else {
       setCheckedCategories([...checkedCategories, code]);
     }
+  };
+
+  const renderPlaceList = () => {
+    const filteredPlaces = places.filter((place) => {
+      if (checkedCategories.includes('ALL')) {
+        return true;
+      }
+
+      return checkedCategories.includes(place.subCategory);
+    });
+
+    if (filteredPlaces.length === 0) {
+      return (
+        <Box
+          sx={{
+            flex: '1',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            gap: '1rem',
+            marginTop: '4rem',
+          }}
+        >
+          <PlaceEmpty />
+          <Typography
+            sx={{
+              fontSize: '1rem',
+              fontWeight: '500',
+              color: (theme) => theme.color.main[100],
+              textAlign: 'center',
+            }}
+          >
+            아직 저장한 장소가 없어요
+          </Typography>
+        </Box>
+      );
+    }
+
+    return filteredPlaces.map((place) => <MapListItem key={place.commonPlaceId} place={place} />);
   };
 
   React.useEffect(() => {
@@ -74,17 +115,7 @@ const MapList = () => {
       )}
       <MapListCategoryFilter checkedCategories={checkedCategories} onChange={handleCheckedCategoriesChange} />
       <Stack sx={{ gap: '1rem', width: '100%', height: '100%', flex: '1', overflow: 'scroll' }}>
-        {places
-          ?.filter((place) => {
-            if (checkedCategories.includes('ALL')) {
-              return true;
-            }
-
-            return checkedCategories.includes(place.subCategory);
-          })
-          .map((place) => (
-            <MapListItem key={place.commonPlaceId} place={place} />
-          ))}
+        {renderPlaceList()}
       </Stack>
     </Box>
   );
