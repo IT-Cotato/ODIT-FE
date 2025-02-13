@@ -16,3 +16,11 @@ export const postPlaces = async (place) => {
 
   return res;
 };
+
+export const putPlaces = async (place) => {
+  const res = await axiosInstance.put(`/api/places/${place.commonPlaceId}`, {
+    place,
+  });
+
+  return res.data;
+};
