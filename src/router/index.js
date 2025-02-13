@@ -41,7 +41,7 @@ const ROUTE_INFO = [
   {
     path: '/map',
     element: <AsyncMap />,
-    isAuthRequired: false,
+    isAuthRequired: true,
   },
 ];
 
