@@ -24,7 +24,7 @@ export const SearchIcon = styled.img`
   height: 30px;
   position: absolute;
   top: 18px;
-  left: 383px;
+  left: 283px;
   opacity: 1;
 `;
 
@@ -33,7 +33,7 @@ export const EventIcon = styled.img`
   height: 30px;
   position: absolute;
   top: 18px;
-  left: 423px;
+  left: 323px;
   opacity: 1;
 `;
 
@@ -53,12 +53,12 @@ export const StyledDayPicker = styled.div`
     transition: background-color 0.3s ease;
   }
 
-  .rdp-today {
-    color: white;
-    font-weight: bold;
-    background: #424242;
-    border-radius: 50%;
-  }
+  // .rdp-today {
+  //   color: white;
+  //   font-weight: bold;
+  //   background: #424242;
+  //   border-radius: 50%;
+  // }
 
   .rdp-outside {
     color: #bdbdbd;

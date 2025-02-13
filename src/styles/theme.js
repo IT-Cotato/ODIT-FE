@@ -1,6 +1,7 @@
 const color = {
   error: '#FF6060',
   main: {
+    3: '#F6F2FF',
     5: '#EFE9FF',
     10: '#DED0FF',
     20: '#C1A6FF',
@@ -33,8 +34,13 @@ const color = {
   },
 };
 
+const typography = {
+  fontFamily: 'Pretendard',
+};
+
 const theme = {
   color,
+  typography,
 };
 
 export default theme;
