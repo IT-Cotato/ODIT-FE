@@ -1,14 +1,14 @@
 import { Chip, useTheme } from '@mui/material';
 import React from 'react';
 
-const FilterChip = ({ checked = true, onClick }) => {
+const FilterChip = ({ checked, label, onClick }) => {
   const theme = useTheme();
 
   return (
     <Chip
       clickable
       checked={checked}
-      label="칩칩칩"
+      label={label}
       onClick={onClick}
       sx={{
         '&.MuiChip-root': {
