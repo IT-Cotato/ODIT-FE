@@ -8,7 +8,7 @@ export const postPlaces = async (place) => {
     longitude: place.x,
     addressName: place.address_name,
     roadAddressName: place.road_address_name,
-    subCategory: place.category_group_name,
+    subCategory: place.category_group_code,
     url: place.place_url,
     memo: place.memo,
     imageUrlList: [],
