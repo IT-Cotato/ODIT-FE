@@ -70,9 +70,9 @@ const NavigationBar = () => {
         justifyContent: 'space-between',
       }}
     >
-      {NAVIGATION_BAR_ITEMS.map(({ label, defaultIcon, selectedIcon, path }) => (
+      {NAVIGATION_BAR_ITEMS.map(({ defaultIcon, selectedIcon, path }) => (
         <BottomNavigationAction
-          key={label}
+          key={path}
           icon={isSelectedIcon(path) ? selectedIcon : defaultIcon}
           sx={{
             minWidth: 0,
