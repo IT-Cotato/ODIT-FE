@@ -93,12 +93,33 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
     });
   };
 
+  const handleClickPlace = (place) => {
+    const index = data?.data.findIndex((p) => p.commonPlaceId === place.commonPlaceId);
+
+    if (index === -1) {
+      return;
+    }
+
+    const newPlaces = [...(data?.data ?? [])];
+    const [removed] = newPlaces.splice(index, 1);
+    newPlaces.unshift(removed);
+
+    mutate(
+      {
+        ...data,
+        data: newPlaces,
+      },
+      false,
+    );
+  };
+
   return {
     isLoading,
     places: data?.data || [],
     handleSearchKeyword,
     handleFilterCategories,
     handleVisitPlace,
+    handleClickPlace,
   };
 };
 
