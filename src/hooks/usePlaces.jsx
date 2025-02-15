@@ -5,12 +5,12 @@ import { putPlaces } from '../apis/places';
 import { PLACE_CATEGORY_CODE_MAP } from '../constant';
 
 const usePlaces = ({ path = 'location', param = {} } = {}) => {
-  const { currentLocation } = useCurrentLocation();
+  const { isLoading: isCurrentLocationLoading, currentLocation } = useCurrentLocation();
 
   const { isLoading, data, mutate } = useSWR(
     [`/api/places/${path}`, Object.keys(param).length === 0 ? currentLocation : param],
     ([url, params]) => {
-      if (path === 'location' && Object.keys(params).some((key) => key !== 'latitude' && key !== 'longitude')) {
+      if (path === 'location' && isCurrentLocationLoading) {
         return;
       }
 
@@ -30,7 +30,7 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
       return;
     }
 
-    const newPlaces = places.reduce((acc, cur) => {
+    const newPlaces = places?.reduce((acc, cur) => {
       const { placeName, addressName, roadAddressName, memo, subCategory } = cur;
 
       if (
@@ -64,7 +64,7 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
       return;
     }
 
-    const newPlaces = places.reduce((acc, cur) => {
+    const newPlaces = places?.reduce((acc, cur) => {
       if (categories.includes(cur.subCategory)) {
         return [...acc, cur];
       }
