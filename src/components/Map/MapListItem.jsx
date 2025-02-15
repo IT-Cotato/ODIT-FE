@@ -3,9 +3,16 @@ import { Box, Typography, useTheme } from '@mui/material';
 import styled from '@emotion/styled/macro';
 import CheckBox from '../common/CheckBox';
 import { PLACE_CATEGORY_CODE_MAP } from '../../constant';
+import useMapListCheckPlacesStore from '../../stores/useMapListCheckPlacesStore';
 
-const MapListItem = ({ place, onCheckClick, onPlaceClick }) => {
+const MapListItem = ({ place }) => {
   const theme = useTheme();
+
+  const { mapListCheckPlaces, setMapListCheckPlaces } = useMapListCheckPlacesStore();
+
+  const handleCheckBoxChange = () => {
+    setMapListCheckPlaces(place);
+  };
 
   return (
     <Box
@@ -25,7 +32,7 @@ const MapListItem = ({ place, onCheckClick, onPlaceClick }) => {
           gap: '1rem',
         }}
       >
-        <CheckBox checked={place.visited} />
+        <CheckBox checked={mapListCheckPlaces.includes(place)} onChange={handleCheckBoxChange} />
         <Box
           sx={{
             display: 'flex',

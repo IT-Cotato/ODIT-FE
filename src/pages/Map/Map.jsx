@@ -7,6 +7,8 @@ import BottomDrawer from '../../components/common/BottomDrawer';
 import useDebounce from '../../hooks/useDebounce';
 import useKakaomap from '../../hooks/useKakaomap';
 import NavigationBar from '../../components/common/NavigationBar';
+import useMapListCheckPlacesStore from '../../stores/useMapListCheckPlacesStore';
+import MapListCheckFooter from '../../components/Map/MapListCheckFooter';
 
 const Map = () => {
   const [searchText, setSearchText] = React.useState('');
@@ -19,8 +21,18 @@ const Map = () => {
 
   const { handleSearchKeyword } = usePlaces();
 
+  const { mapListCheckPlaces } = useMapListCheckPlacesStore();
+
   const handleSearchTextChange = (changedText) => {
     setSearchText(changedText);
+  };
+
+  const renderBottomDrawerFooter = () => {
+    if (mapListCheckPlaces.length === 0) {
+      return <NavigationBar />;
+    }
+
+    return <MapListCheckFooter />;
   };
 
   React.useEffect(() => {
@@ -41,7 +53,7 @@ const Map = () => {
         </PointerEventsBox>
       </OverlayBox>
       <PointerEventsBox>
-        <BottomDrawer footer={<NavigationBar />}>
+        <BottomDrawer footer={renderBottomDrawerFooter()}>
           <MapList />
         </BottomDrawer>
       </PointerEventsBox>

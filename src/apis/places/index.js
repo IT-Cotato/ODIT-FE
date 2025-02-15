@@ -24,3 +24,15 @@ export const putPlaces = async (place) => {
 
   return res.data;
 };
+
+export const deletePlaces = async (place) => {
+  const res = await axiosInstance.delete(`/api/places/${place.userPlaceId}`);
+
+  return res.data;
+};
+
+export const putPlacesVisit = async (place) => {
+  const res = await axiosInstance.put(`/api/places/${place.userPlaceId}/visit`);
+
+  return res.data;
+};

@@ -60,7 +60,6 @@ const NavigationBar = () => {
   return (
     <BottomNavigation
       showLabels={false}
-      value={0}
       onChange={(_, newValue) => {
         handleNavigation(NAVIGATION_BAR_ITEMS[newValue].path);
       }}

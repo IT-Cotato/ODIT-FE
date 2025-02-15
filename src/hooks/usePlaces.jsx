@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import fetcherWithParams from '../utils/fetcherWithParams';
 import useCurrentLocation from './useCurrentLocation';
-import { putPlaces } from '../apis/places';
+import { deletePlaces, putPlaces, putPlacesVisit } from '../apis/places';
 import { PLACE_CATEGORY_CODE_MAP } from '../constant';
 
 const usePlaces = ({ path = 'location', param = {} } = {}) => {
@@ -81,19 +81,6 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
     );
   };
 
-  const handleVisitPlace = async (place) => {
-    const newPlaces = data?.data.map((p) => {
-      if (p.commonPlaceId === place.commonPlaceId) {
-        return { ...p, visited: !p.visited };
-      }
-      return p;
-    });
-
-    mutate(putPlaces(place), {
-      optimisticData: newPlaces,
-    });
-  };
-
   const handleClickPlace = (place) => {
     const index = data?.data.findIndex((p) => p.commonPlaceId === place.commonPlaceId);
 
@@ -114,13 +101,45 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
     );
   };
 
+  const handleVisitPlaces = async (places) => {
+    await Promise.all(places.map((place) => putPlacesVisit(place)));
+
+    const newPlaces = data?.data.map((place) => {
+      if (places.some((p) => p.commonPlaceId === place.commonPlaceId)) {
+        return {
+          ...place,
+          isVisit: true,
+        };
+      }
+
+      return place;
+    });
+
+    mutate({
+      ...data,
+      data: newPlaces,
+    });
+  };
+
+  const handleDeletePlaces = async (places) => {
+    await Promise.all(places.map((place) => deletePlaces(place)));
+
+    const newPlaces = data?.data.filter((place) => !places.some((p) => p.commonPlaceId === place.commonPlaceId));
+
+    mutate({
+      ...data,
+      data: newPlaces,
+    });
+  };
+
   return {
     isLoading,
     places: data?.data || [],
     handleSearchKeyword,
     handleFilterCategories,
-    handleVisitPlace,
     handleClickPlace,
+    handleVisitPlaces,
+    handleDeletePlaces,
   };
 };
 

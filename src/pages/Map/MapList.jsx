@@ -19,10 +19,6 @@ const MapList = () => {
 
   const { places, handleFilterCategories, handleSearchKeyword } = usePlaces();
 
-  const handleSearchTextChange = (changedText) => {
-    setSearchText(changedText);
-  };
-
   const handleCheckedCategoriesChange = (code) => {
     if (code === 'ALL' && !checkedCategories.includes(code)) {
       setCheckedCategories(['ALL']);
@@ -37,6 +33,10 @@ const MapList = () => {
     } else {
       setCheckedCategories([...checkedCategories, code]);
     }
+  };
+
+  const handleSearchTextChange = (changedText) => {
+    setSearchText(changedText);
   };
 
   const renderPlaceList = () => {
