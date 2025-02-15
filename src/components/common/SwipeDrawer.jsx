@@ -2,50 +2,18 @@ import React from 'react';
 import { Global } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import useSwipeDrawerOpenState from '../../stores/useSwipeDrawerOpenState';
 
 /**
  * SwipeDrawer Component
  * A reusable and customizable swipeable bottom drawer component.
  *
- * @prop {boolean} open - Initial open state of the drawer. Default is `false`.
- * @prop {boolean} full - Determines if the drawer takes up the full height. Default is `false`.
  * @prop {boolean} modal - Controls the presence of a modal backdrop. Default is `true`.
  * @prop {boolean} disableClose - Prevents the drawer from being closed. Default is `false`.
  * @prop {string} height - The height of the drawer content if `full` is `false`. Default is `'fit-content'`.
  * @prop {React.ReactNode} children - The content to be rendered inside the drawer.
  */
-const SwipeDrawer = ({
-  open = false,
-  full = false,
-  modal = true,
-  disableClose = false,
-  height = 'fit-content',
-  children,
-}) => {
-  // const [openState, setOpenState] = React.useState(open ? 'open' : 'closed');
-
-  const { swipeDrawerOpenState: openState, setSwipeDrawerOpenState: setOpenState } = useSwipeDrawerOpenState();
-
+const SwipeDrawer = ({ modal = true, children }) => {
   const drawerBleeding = 32;
-
-  const toggleDrawer = (currentState) => () => {
-    if (disableClose) {
-      return;
-    }
-
-    if (currentState === 'open') {
-      setOpenState('full');
-    } else if (currentState === 'full') {
-      setOpenState('open');
-    } else {
-      setOpenState('open');
-    }
-  };
-
-  React.useEffect(() => {
-    return () => setOpenState('open');
-  }, []);
 
   return (
     <>
@@ -57,8 +25,8 @@ const SwipeDrawer = ({
 
           '.MuiDrawer-root > .MuiPaper-root': {
             transition: 'height 0.3s ease-in-out, max-height 0.3s ease-in-out !important',
-            height: openState === 'full' ? `calc(100% - ${drawerBleeding}px)` : 'fit-content',
-            maxHeight: openState === 'full' ? '100%' : '14rem',
+            height: 'fit-content',
+            maxHeight: '14rem',
             overflow: 'visible',
             pointerEvents: 'auto',
           },
@@ -66,11 +34,11 @@ const SwipeDrawer = ({
       />
       <SwipeableDrawer
         anchor="bottom"
-        open={openState !== 'closed'}
-        onClose={() => !disableClose && setOpenState('closed')}
-        onOpen={() => setOpenState('open')}
+        open
+        disableSwipeToOpen
+        disableDiscovery
         swipeAreaWidth={drawerBleeding}
-        disableSwipeToisOpen={false}
+        onClose={() => {}}
         ModalProps={{
           keepMounted: true,
         }}
@@ -86,7 +54,6 @@ const SwipeDrawer = ({
         }}
       >
         <StyledBox
-          onClick={toggleDrawer(openState)}
           sx={{
             position: 'absolute',
             top: -drawerBleeding,
