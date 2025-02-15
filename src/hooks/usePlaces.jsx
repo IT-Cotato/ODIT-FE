@@ -32,10 +32,11 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
 
     const newPlaces = places.reduce((acc, cur) => {
       const { placeName, addressName, roadAddressName, memo, subCategory } = cur;
+
       if (
-        [placeName, addressName, roadAddressName, memo, PLACE_CATEGORY_CODE_MAP[subCategory]]
+        [placeName, addressName, roadAddressName, memo, PLACE_CATEGORY_CODE_MAP[subCategory] ?? '']
           .map((str) => str.toLowerCase().replace(/\s/g, ''))
-          .some((str) => str.includes(trimedKeyword))
+          .some((str) => str.toLowerCase().includes(trimedKeyword))
       ) {
         return [...acc, cur];
       }
