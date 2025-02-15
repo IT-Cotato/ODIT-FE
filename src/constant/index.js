@@ -20,6 +20,7 @@ export const PLACE_CATEGORY_CODE_MAP = {
   BK9: '은행',
   HP8: '병원',
   PM9: '약국',
+  '': '기타',
 };
 
 export const PLACE_CATEGORY_CODE_WITH_ALL_MAP = {
