@@ -18,9 +18,13 @@ const AddLayout = () => {
     navigate(-1);
   };
 
+  const handleHeaderCloseClick = () => {
+    navigate('/');
+  };
+
   return (
     <>
-      {isHeader && <HeaderSub onClickShevron={handleHeaderChevronClick} />}
+      {isHeader && <HeaderSub onClickShevron={handleHeaderChevronClick} onClickClose={handleHeaderCloseClick} />}
       <Outlet />
     </>
   );

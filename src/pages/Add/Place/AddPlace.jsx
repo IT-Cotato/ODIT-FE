@@ -33,6 +33,7 @@ const AddPlace = () => {
 
   const handleNextButton = () => {
     postPlaces(placeList[numericIndex]).then(() => {
+      setMemo('');
       navigate(`/add/place/${numericIndex + 1}`);
     });
   };

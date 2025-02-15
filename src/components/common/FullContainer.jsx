@@ -5,11 +5,9 @@ import { HEADER_HEIGHT } from '../../constant';
 /**
  * FullContainer component
  * Style for full flex colomn container
- * Height is 100% - HEADER_HEIGHT
- * @param {React.node} param0
- * @returns
+ * @param {string} height - height of container (default: `calc(100% - ${HEADER_HEIGHT})`)
  */
-const FullContainer = ({ children }) => {
+const FullContainer = ({ height = `calc(100% - ${HEADER_HEIGHT})`, children }) => {
   return (
     <Box
       sx={{
@@ -17,7 +15,7 @@ const FullContainer = ({ children }) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: `calc(100% - ${HEADER_HEIGHT})`,
+        height,
         padding: '1.5rem',
         boxSizing: 'border-box',
       }}

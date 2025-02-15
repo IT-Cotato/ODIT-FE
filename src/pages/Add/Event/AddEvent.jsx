@@ -143,7 +143,7 @@ const AddEvent = () => {
           startDate: null,
           endDate: null,
           location: '',
-          category: '',
+          category: Object.keys(EVENT_CATEGORY_CODE_MAP)[0],
           memo: '',
         },
       ]);

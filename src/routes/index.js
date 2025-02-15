@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import AuthGuard from '../components/common/AuthGuard';
 import addRouter from './addRouter';
+import NotFound from '../components/common/NotFound';
 
 const AsyncHome = React.lazy(() => import('../pages/Home/Home'));
 const AsyncLogin = React.lazy(() => import('../pages/Login/Login'));
@@ -41,6 +42,11 @@ const ROUTE_INFO = [
   {
     path: '/map',
     element: <AsyncMap />,
+    isAuthRequired: true,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
     isAuthRequired: false,
   },
 ];
