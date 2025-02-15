@@ -1,5 +1,6 @@
 import styled from '@emotion/styled/macro';
 import React from 'react';
+import { useTransition, animated } from '@react-spring/web';
 import TextFieldLarge from '../../components/common/TextFieldLarge';
 import MapList from './MapList';
 import usePlaces from '../../hooks/usePlaces';
@@ -28,11 +29,19 @@ const Map = () => {
   };
 
   const renderBottomDrawerFooter = () => {
-    if (mapListCheckPlaces.length === 0) {
-      return <NavigationBar />;
-    }
+    const transitions = useTransition(mapListCheckPlaces.length > 0, {
+      from: { transform: 'translateY(100%)', opacity: 0 },
+      enter: { transform: 'translateY(0%)', opacity: 1 },
+      leave: { transform: 'translateY(100%)', opacity: 0 },
+      config: { mass: 1, tension: 280, friction: 26 },
+      immediate: false,
+    });
 
-    return <MapListCheckFooter />;
+    return transitions((styles, isMapListCheckFooter) => (
+      <animated.div key={isMapListCheckFooter ? 'footer' : 'nav'} style={styles}>
+        {isMapListCheckFooter ? <MapListCheckFooter /> : <NavigationBar />}
+      </animated.div>
+    ));
   };
 
   React.useEffect(() => {
