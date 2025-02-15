@@ -38,7 +38,7 @@ const Login = () => {
     return (
       <ButtonContatiner>
         {SOCIAL_LOGIN_LIST.map((social) => (
-          <LoginButton social={social} onClick={handleKakaoLogin} />
+          <LoginButton key={social} social={social} onClick={handleKakaoLogin} />
         ))}
       </ButtonContatiner>
     );
