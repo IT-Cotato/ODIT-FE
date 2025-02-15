@@ -7,7 +7,6 @@ import { ReactComponent as CheckIcon } from '../../assets/icons/check_24_1_5_px.
 import usePlaces from '../../hooks/usePlaces';
 import useMapListCheckPlacesStore from '../../stores/useMapListCheckPlacesStore';
 import ConfirmDialog from '../common/ConfirmDialog';
-import { deletePlaces, putPlacesVisit } from '../../apis/places';
 
 const MapListCheckFooter = () => {
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = React.useState(false);

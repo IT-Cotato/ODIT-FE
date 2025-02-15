@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import fetcherWithParams from '../utils/fetcherWithParams';
 import useCurrentLocation from './useCurrentLocation';
-import { deletePlaces, putPlaces, putPlacesVisit } from '../apis/places';
+import { deletePlaces, putPlacesVisit } from '../apis/places';
 import { PLACE_CATEGORY_CODE_MAP } from '../constant';
 
 const usePlaces = ({ path = 'location', param = {} } = {}) => {

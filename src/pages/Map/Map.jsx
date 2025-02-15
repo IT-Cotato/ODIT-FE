@@ -17,7 +17,7 @@ const Map = () => {
 
   const mapContainerRef = React.useRef(null);
 
-  const { mapRef } = useKakaomap({ mapContainerRef });
+  useKakaomap({ mapContainerRef });
 
   const { handleSearchKeyword } = usePlaces();
 
