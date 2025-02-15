@@ -49,6 +49,14 @@ const NavigationBar = () => {
     navigate(path);
   };
 
+  const isSelectedIcon = (path) => {
+    if (path === '/') {
+      return location.pathname === '/';
+    }
+
+    return location.pathname.includes(path);
+  };
+
   return (
     <BottomNavigation
       showLabels={false}
@@ -65,7 +73,7 @@ const NavigationBar = () => {
       {NAVIGATION_BAR_ITEMS.map(({ label, defaultIcon, selectedIcon, path }) => (
         <BottomNavigationAction
           key={label}
-          icon={location.pathname.includes(path) ? selectedIcon : defaultIcon}
+          icon={isSelectedIcon(path) ? selectedIcon : defaultIcon}
           sx={{
             minWidth: 0,
           }}

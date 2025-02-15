@@ -6,6 +6,7 @@ import usePlaces from '../../hooks/usePlaces';
 import BottomDrawer from '../../components/common/BottomDrawer';
 import useDebounce from '../../hooks/useDebounce';
 import useKakaomap from '../../hooks/useKakaomap';
+import NavigationBar from '../../components/common/NavigationBar';
 
 const Map = () => {
   const [searchText, setSearchText] = React.useState('');
@@ -40,7 +41,7 @@ const Map = () => {
         </PointerEventsBox>
       </OverlayBox>
       <PointerEventsBox>
-        <BottomDrawer open blocking={false}>
+        <BottomDrawer footer={<NavigationBar />}>
           <MapList />
         </BottomDrawer>
       </PointerEventsBox>
