@@ -1,4 +1,3 @@
-import React from 'react';
 import useSWR from 'swr';
 import fetcherWithParams from '../utils/fetcherWithParams';
 import useCurrentLocation from './useCurrentLocation';
@@ -10,13 +9,20 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
 
   const { isLoading, data, mutate } = useSWR(
     [`/api/places/${path}`, Object.keys(param).length === 0 ? currentLocation : param],
-    ([url, params]) => fetcherWithParams(url, params),
+    ([url, params]) => {
+      if (path === 'location' && Object.keys(params).some((key) => key !== 'latitude' && key !== 'longitude')) {
+        return;
+      }
+
+      // eslint-disable-next-line consistent-return
+      return fetcherWithParams(url, params);
+    },
   );
 
-  const places = data?.data || [];
-
   const handleSearchKeyword = async (keyword) => {
-    await mutate();
+    const res = await mutate();
+
+    const places = res?.data;
 
     const trimedKeyword = keyword.toLowerCase().replace(/\s/g, '');
 
@@ -26,10 +32,8 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
 
     const newPlaces = places.reduce((acc, cur) => {
       const { placeName, addressName, roadAddressName, memo, subCategory } = cur;
-      // console.log([placeName, addressName, roadAddressName, memo].map((str) => str.toLowerCase().replace(/\s/g, '')));
       if (
-        // [placeName, addressName, roadAddressName, memo, PLACE_CATEGORY_CODE_MAP[subCategory]]
-        [placeName, addressName, roadAddressName, memo]
+        [placeName, addressName, roadAddressName, memo, PLACE_CATEGORY_CODE_MAP[subCategory]]
           .map((str) => str.toLowerCase().replace(/\s/g, ''))
           .some((str) => str.includes(trimedKeyword))
       ) {
@@ -51,7 +55,9 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
   };
 
   const handleFilterCategories = async (categories) => {
-    await mutate();
+    const res = await mutate();
+
+    const places = res?.data;
 
     if (categories.includes('ALL')) {
       return;
@@ -75,7 +81,7 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
   };
 
   const handleVisitPlace = async (place) => {
-    const newPlaces = places.map((p) => {
+    const newPlaces = data?.data.map((p) => {
       if (p.commonPlaceId === place.commonPlaceId) {
         return { ...p, visited: !p.visited };
       }
@@ -89,7 +95,7 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
 
   return {
     isLoading,
-    places,
+    places: data?.data || [],
     handleSearchKeyword,
     handleFilterCategories,
     handleVisitPlace,
