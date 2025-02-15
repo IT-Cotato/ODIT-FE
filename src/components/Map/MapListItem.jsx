@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 import styled from '@emotion/styled/macro';
 import CheckBox from '../common/CheckBox';
+import { PLACE_CATEGORY_CODE_MAP } from '../../constant';
 
 const MapListItem = ({ place, onCheckClick, onPlaceClick }) => {
   const theme = useTheme();
@@ -39,7 +40,7 @@ const MapListItem = ({ place, onCheckClick, onPlaceClick }) => {
               color: theme.color.main[100],
             }}
           >
-            {place.subCategory}
+            {PLACE_CATEGORY_CODE_MAP[place.subCategory]}
           </Typography>
           <Typography
             sx={{
