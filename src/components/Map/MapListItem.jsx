@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 import styled from '@emotion/styled/macro';
+import { Link } from 'react-router';
 import CheckBox from '../common/CheckBox';
 import { PLACE_CATEGORY_CODE_MAP } from '../../constant';
 import useMapListCheckPlacesStore from '../../stores/useMapListCheckPlacesStore';
@@ -33,41 +34,43 @@ const MapListItem = ({ place }) => {
         }}
       >
         <CheckBox checked={mapListCheckPlaces.includes(place)} onChange={handleCheckBoxChange} />
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-          }}
-        >
-          <Typography
+        <Link to={`/detail?type=place&id=${place.commonPlaceId}`}>
+          <Box
             sx={{
-              fontSize: '0.875rem',
-              fontWeight: '500',
-              color: theme.color.main[100],
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
             }}
           >
-            {PLACE_CATEGORY_CODE_MAP[place.subCategory]}
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: '1.125rem',
-              fontWeight: '600',
-              color: theme.color.black[900],
-            }}
-          >
-            {place.placeName}
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: '0.875rem',
-              fontWeight: '500',
-              color: theme.color.black[400],
-            }}
-          >
-            {place.addressName}
-          </Typography>
-        </Box>
+            <Typography
+              sx={{
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                color: theme.color.main[100],
+              }}
+            >
+              {PLACE_CATEGORY_CODE_MAP[place.subCategory]}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: '1.125rem',
+                fontWeight: '600',
+                color: theme.color.black[900],
+              }}
+            >
+              {place.placeName}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: '0.875rem',
+                fontWeight: '500',
+                color: theme.color.black[400],
+              }}
+            >
+              {place.addressName}
+            </Typography>
+          </Box>
+        </Link>
       </Box>
       <StyledHr />
     </Box>
