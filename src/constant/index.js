@@ -1,4 +1,5 @@
 export const HEADER_HEIGHT = '4.5rem';
+export const NAVIGATION_BAR_HEIGHT = '3.75rem';
 
 export const PLACE_CATEGORY_CODE_MAP = {
   FD6: '음식점',
