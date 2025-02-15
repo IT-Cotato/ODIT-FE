@@ -30,6 +30,8 @@ const MapList = () => {
       setCheckedCategories([code]);
     } else if (checkedCategories.length === Object.keys(PLACE_CATEGORY_CODE_WITH_ALL_MAP).length - 2) {
       setCheckedCategories(['ALL']);
+    } else if (checkedCategories.includes(code) && checkedCategories.length === 1) {
+      setCheckedCategories(['ALL']);
     } else if (checkedCategories.includes(code)) {
       setCheckedCategories(checkedCategories.filter((checkedCode) => checkedCode !== code));
     } else {
