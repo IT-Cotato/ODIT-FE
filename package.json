@@ -5,14 +5,22 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/material": "^6.3.0",
+    "@mui/material": "^6.4.0",
+    "@mui/x-date-pickers": "^7.26.0",
+    "@react-spring/web": "^9.7.5",
     "axios": "^1.7.9",
     "cra-template-pwa": "2.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "dayjs": "^1.11.13",
+    "immer": "^10.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-fast-marquee": "^1.6.5",
     "react-router": "^7.1.1",
     "react-scripts": "5.0.1",
-    "swr": "^2.3.0"
+    "react-spinners": "^0.15.0",
+    "react-spring-bottom-sheet": "3.5.0-alpha.0",
+    "swr": "^2.3.0",
+    "zustand": "^5.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",

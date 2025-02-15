@@ -18,6 +18,7 @@
     "react/prefer-stateless-function": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-one-expression-per-line": 0,
+    "react/prop-types": 0,
     "react/function-component-definition": [
       "error",
       {
@@ -25,11 +26,18 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      { "devDependencies": true, "optionalDependencies": false, "peerDependencies": false }
-    ],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "import/no-extraneous-dependencies": 0,
     "no-nested-ternary": 0,
-    "no-unused-vars": "warn"
+    "no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }],
+    "no-underscore-dangle": 0,
+    "prefer-regex-literals": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".json", ".svg"]
+      }
+    }
   }
 }
