@@ -134,7 +134,8 @@ const usePlaces = ({ path = 'location', param = {} } = {}) => {
 
   return {
     isLoading,
-    places: data?.data || [],
+    places: data?.data.filter((place) => !place.visited) || [],
+    visitedPlaces: data?.data.filter((place) => place.visited) || [],
     handleSearchKeyword,
     handleFilterCategories,
     handleClickPlace,
