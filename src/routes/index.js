@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import AuthGuard from '../components/common/AuthGuard';
 import addRouter from './addRouter';
+import friendRoutes from './friendRoutes';
 import NotFound from '../components/common/NotFound';
 
 const AsyncHome = React.lazy(() => import('../pages/Home/Home'));
@@ -10,7 +11,7 @@ const AsyncRegister = React.lazy(() => import('../pages/Register/Register'));
 const AsyncLoginKakao = React.lazy(() => import('../pages/Login/LoginKakao'));
 const AsyncAdd = React.lazy(() => import('../pages/Add/AddLayout'));
 const AsyncMap = React.lazy(() => import('../pages/Map/Map'));
-const AsyncFriend = React.lazy(() => import('../pages/Friend/Friend'));
+const AsyncFriendLayout = React.lazy(() => import('../pages/Friend/FriendLayout'));
 
 const ROUTE_INFO = [
   {
@@ -46,9 +47,10 @@ const ROUTE_INFO = [
     isAuthRequired: true,
   },
   {
-    path: '/friend/*',
-    element: <AsyncFriend />,
+    path: '/friend',
+    element: <AsyncFriendLayout />,
     isAuthRequired: true,
+    children: friendRoutes,
   },
   {
     path: '*',
