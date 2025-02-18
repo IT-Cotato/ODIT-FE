@@ -10,6 +10,7 @@ const AsyncRegister = React.lazy(() => import('../pages/Register/Register'));
 const AsyncLoginKakao = React.lazy(() => import('../pages/Login/LoginKakao'));
 const AsyncAdd = React.lazy(() => import('../pages/Add/AddLayout'));
 const AsyncMap = React.lazy(() => import('../pages/Map/Map'));
+const AsyncFriend = React.lazy(() => import('../pages/Friend/Friend'));
 
 const ROUTE_INFO = [
   {
@@ -42,6 +43,11 @@ const ROUTE_INFO = [
   {
     path: '/map',
     element: <AsyncMap />,
+    isAuthRequired: true,
+  },
+  {
+    path: '/friend/*',
+    element: <AsyncFriend />,
     isAuthRequired: true,
   },
   {
