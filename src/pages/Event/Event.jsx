@@ -5,13 +5,13 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/style.css';
 import FullContainer from '../../components/common/FullContainer';
 import { ko } from 'react-day-picker/locale';
-import searchIcon from '../../assets/icons/search_24.svg';
-import eventIcon from '../../assets/icons/event_24.svg';
+import { ReactComponent as SearchIcon } from '../../assets/icons/search_24.svg';
+import { ReactComponent as EventIcon } from '../../assets/icons/event_24.svg';
 import { useTheme } from '@emotion/react';
 import EventFilter from './EventFilter';
 import EventCategoryFilter from './EventCategoryFilter';
 import EventRegionFilter from './EventRegionFilter';
-import { Topbar, SearchIcon, StyledDayPicker, EventIcon } from '../../styles/Event';
+import { Topbar, StyledDayPicker } from '../../styles/Event';
 import BottomDrawer from '../../components/common/BottomDrawer';
 import useIsBottomDrawerFullOpenStore from '../../stores/useIsBottomDrawerFullOpenStore';
 import { Fade, Box, Typography } from '@mui/material';
@@ -23,9 +23,15 @@ const Event = () => {
   const { selectedCategory, showRegionFilter, selectedRegion, handleCategoryClick, setSelectedRegion } = EventFilter();
 
   const { isBottomDrawerFullOpen } = useIsBottomDrawerFullOpenStore();
-  console.log('isBottomDrawerFullOpen', isBottomDrawerFullOpen);
 
   const theme = useTheme();
+
+  const handleSearchIconClick = () => {};
+
+  const handleEventIconClick = () => {
+    console.log('Event Icon Clicked!');
+    window.location.href = '/EventSelect';
+  };
 
   // onClick={() => (window.location.href = '/event')}
 
@@ -33,8 +39,40 @@ const Event = () => {
     <FullContainer>
       <div className="App">
         <Topbar>
-          <SearchIcon src={searchIcon} alt="Search" />
-          <EventIcon src={eventIcon} alt="Event" onClick={() => console.log('Event Icon Clicked!')} />
+          <button
+            type="button"
+            onClick={handleSearchIconClick}
+            style={{
+              background: 'none',
+              border: 'none',
+              left: '283px',
+              width: '50px',
+              height: '50px',
+              top: '8px',
+              cursor: 'pointer',
+              position: 'relative',
+              display: 'inline-block',
+            }}
+          >
+            <SearchIcon />
+          </button>
+          <button
+            type="button"
+            onClick={handleEventIconClick}
+            style={{
+              background: 'none',
+              border: 'none',
+              left: '285px',
+              width: '50px',
+              height: '50px',
+              top: '8px',
+              cursor: 'pointer',
+              position: 'relative',
+              display: 'inline-block',
+            }}
+          >
+            <EventIcon />
+          </button>
         </Topbar>
 
         <StyledDayPicker>
@@ -84,11 +122,6 @@ const Event = () => {
           )}
 
           <EventCategoryFilter selectedCategory={selectedCategory} handleCategoryClick={handleCategoryClick} />
-          <EventRegionFilter
-            showRegionFilter={showRegionFilter}
-            selectedRegion={selectedRegion}
-            setSelectedRegion={setSelectedRegion}
-          />
 
           {/* {filteredEvents.map(event => <EventItem key={event.id} event={event} />)} */}
         </BottomDrawer>

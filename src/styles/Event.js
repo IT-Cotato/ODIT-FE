@@ -85,3 +85,15 @@ export const EventFilterItem = styled.div`
   border: ${({ selected }) => (selected ? '1px solid #6420FF' : '1px solid #000000')};
   color: ${({ selected }) => (selected ? '#6420FF' : 'black')};
 `;
+
+export const EventIconButton = styled.button`
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  left: 323px;
+`;
