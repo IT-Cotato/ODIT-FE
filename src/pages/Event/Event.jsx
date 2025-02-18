@@ -1,50 +1,39 @@
+/* eslint-disable import/order */
+/* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
 import { DayPicker } from 'react-day-picker';
-import { Box, Typography } from '@mui/material';
 import 'react-day-picker/style.css';
 import FullContainer from '../../components/common/FullContainer';
-import SwipeDrawer from '../../components/common/SwipeDrawer';
 import { ko } from 'react-day-picker/locale';
 import searchIcon from '../../assets/icons/search_24.svg';
 import eventIcon from '../../assets/icons/event_24.svg';
-import { Topbar, Span, SearchIcon, StyledDayPicker, EventIcon } from '../../styles/Event';
-
-const EVENT_LIST = [
-  {
-    text: '최신순',
-  },
-  {
-    text: '지역',
-  },
-  {
-    text: '전체',
-  },
-  {
-    text: '전시',
-  },
-  {
-    text: '공연',
-  },
-  {
-    text: '팝업',
-  },
-  {
-    text: '축제',
-  },
-  {
-    text: '기타',
-  },
-];
+import { useTheme } from '@emotion/react';
+import EventFilter from './EventFilter';
+import EventCategoryFilter from './EventCategoryFilter';
+import EventRegionFilter from './EventRegionFilter';
+import { Topbar, SearchIcon, StyledDayPicker, EventIcon } from '../../styles/Event';
+import BottomDrawer from '../../components/common/BottomDrawer';
+import useIsBottomDrawerFullOpenStore from '../../stores/useIsBottomDrawerFullOpenStore';
+import { Fade, Box, Typography } from '@mui/material';
+import TextFieldLarge from '../../components/common/TextFieldLarge';
 
 const Event = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [month, setMonth] = useState(new Date());
+  const { selectedCategory, showRegionFilter, selectedRegion, handleCategoryClick, setSelectedRegion } = EventFilter();
+
+  const { isBottomDrawerFullOpen } = useIsBottomDrawerFullOpenStore();
+  console.log('isBottomDrawerFullOpen', isBottomDrawerFullOpen);
+
+  const theme = useTheme();
+
+  // onClick={() => (window.location.href = '/event')}
 
   return (
     <FullContainer>
       <div className="App">
         <Topbar>
-          <SearchIcon src={searchIcon} alt="Search" onClick={() => console.log('Search Icon Clicked!')} />
+          <SearchIcon src={searchIcon} alt="Search" />
           <EventIcon src={eventIcon} alt="Event" onClick={() => console.log('Event Icon Clicked!')} />
         </Topbar>
 
@@ -65,37 +54,44 @@ const Event = () => {
             }}
           />
         </StyledDayPicker>
-
-        <SwipeDrawer open disableClose>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'baseline',
-              gap: '1.5rem',
-            }}
-          >
-            {EVENT_LIST.map(({ text }) => (
+        <BottomDrawer>
+          {isBottomDrawerFullOpen && (
+            <Fade in={isBottomDrawerFullOpen}>
               <Box
                 sx={{
-                  display: 'flex',
+                  width: '100%',
+                  justifyContent: 'center',
+                  marginTop: '1.5rem',
+                  marginBottom: '-1rem',
                   alignItems: 'center',
-                  gap: '1rem',
-                  backgroundColor: 'transparent',
-                  border: '1px solid black',
-                  borderRadius: '20px',
-                  padding: '0.5rem 1rem',
+                  marginLeft: '20px',
                 }}
-                key={text}
               >
-                {/* 닫기 버튼 */}
-                <Typography height="17px" fontFamily="Pretendard" fontSize="14px" fontWeight="400">
-                  {text}
+                <Typography
+                  variant="h1"
+                  sx={{
+                    color: theme.color.black[900],
+                    fontSize: '1.5rem',
+                    fontWeight: 700,
+                    lineHeight: '140%',
+                  }}
+                >
+                  나의 이벤트
                 </Typography>
+                <TextFieldLarge outlined={false} placeholder="기간을 설정할 수 있어요" />
               </Box>
-            ))}
-          </Box>
-        </SwipeDrawer>
+            </Fade>
+          )}
+
+          <EventCategoryFilter selectedCategory={selectedCategory} handleCategoryClick={handleCategoryClick} />
+          <EventRegionFilter
+            showRegionFilter={showRegionFilter}
+            selectedRegion={selectedRegion}
+            setSelectedRegion={setSelectedRegion}
+          />
+
+          {/* {filteredEvents.map(event => <EventItem key={event.id} event={event} />)} */}
+        </BottomDrawer>
       </div>
     </FullContainer>
   );

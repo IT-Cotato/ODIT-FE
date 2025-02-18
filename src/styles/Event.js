@@ -64,3 +64,24 @@ export const StyledDayPicker = styled.div`
     color: #bdbdbd;
   }
 `;
+
+export const EventFilterContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-left: 20px;
+`;
+
+export const EventFilterItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 20px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: ${({ selected }) => (selected ? '#EFE9FF' : 'transparent')};
+  border: ${({ selected }) => (selected ? '1px solid #6420FF' : '1px solid #000000')};
+  color: ${({ selected }) => (selected ? '#6420FF' : 'black')};
+`;
