@@ -4,17 +4,15 @@ import { Box } from '@mui/material';
 const REGIONS = ['서울', '부산', '대구', '광주', '대전'];
 
 const EventRegionFilter = ({ showRegionFilter, selectedRegion, setSelectedRegion, setShowRegionFilter }) => {
-  // 지역을 클릭하면 선택된 지역으로 설정하고 드롭다운을 닫음
   const handleRegionClick = (region) => {
     setSelectedRegion(region);
-    setShowRegionFilter(false); // 지역 선택 후 드롭다운 닫기
+    setShowRegionFilter(false);
   };
 
   return (
     <Box sx={{ position: 'relative' }}>
-      {/* 기존의 "지역" 버튼 클릭 시 드롭다운 토글 */}
       <Box
-        onClick={() => setShowRegionFilter((prev) => !prev)} // 지역 버튼 클릭 시 드롭다운 토글
+        onClick={() => setShowRegionFilter((prev) => !prev)}
         sx={{
           padding: '10px 16px',
           backgroundColor: '#EFE9FF',
@@ -28,7 +26,6 @@ const EventRegionFilter = ({ showRegionFilter, selectedRegion, setSelectedRegion
         지역
       </Box>
 
-      {/* 드롭다운 메뉴 */}
       {showRegionFilter && (
         <Box
           sx={{
@@ -50,7 +47,7 @@ const EventRegionFilter = ({ showRegionFilter, selectedRegion, setSelectedRegion
           {REGIONS.map((region) => (
             <Box
               key={region}
-              onClick={() => handleRegionClick(region)} // 지역 클릭 시 선택
+              onClick={() => handleRegionClick(region)}
               sx={{
                 padding: '6px 12px',
                 borderRadius: '20px',
@@ -59,7 +56,7 @@ const EventRegionFilter = ({ showRegionFilter, selectedRegion, setSelectedRegion
                 color: selectedRegion === region ? '#6420FF' : 'black',
                 cursor: 'pointer',
                 '&:hover': {
-                  background: '#f0f0f0', // 호버 효과
+                  background: '#f0f0f0',
                 },
               }}
             >

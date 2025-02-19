@@ -2,7 +2,12 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { HEADER_HEIGHT } from '../../constant';
 
-const FullContainer = ({ children }) => {
+/**
+ * FullContainer component
+ * Style for full flex colomn container
+ * @param {string} height - height of container (default: `calc(100% - ${HEADER_HEIGHT})`)
+ */
+const FullContainer = ({ height = `calc(100% - ${HEADER_HEIGHT})`, children }) => {
   return (
     <Box
       sx={{
@@ -10,7 +15,7 @@ const FullContainer = ({ children }) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: `calc(100% - ${HEADER_HEIGHT})`,
+        height,
         padding: '1.5rem',
         boxSizing: 'border-box',
       }}

@@ -3,12 +3,14 @@ import { styled, TextField, InputAdornment, useTheme, Button, FormControl, Typog
 import { ReactComponent as SearchIcon } from '../../assets/icons/search_24.svg';
 import { ReactComponent as ClearIcon } from '../../assets/icons/x_24_1_5.svg';
 
-const StyledFormControl = styled(FormControl)({
+const StyledFormControl = styled(FormControl)(({ theme }) => ({
   width: '21rem',
   display: 'flex',
   flexDirection: 'column',
   gap: '0.75rem',
-});
+  background: theme.color.black[0],
+  borderRadius: '0.75rem',
+}));
 
 const StyledTextField = styled(TextField)(({ theme, outlineColor, borderRadius = '0.75rem' }) => ({
   height: '3.5rem',
@@ -26,6 +28,10 @@ const StyledTextField = styled(TextField)(({ theme, outlineColor, borderRadius =
 
   '&:hover fieldset': {
     borderColor: `${outlineColor} !important`,
+  },
+
+  '& .MuiInput-root.Mui-focused:after': {
+    borderBottomColor: `${outlineColor}`,
   },
 
   '& .MuiOutlinedInput-root': {

@@ -13,9 +13,14 @@ body {
 }
 
 #root {
-  width: 100vw;
   max-width: 600px;
+  width: 100%;
   height: 100dvh;
   overflow: scroll;
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

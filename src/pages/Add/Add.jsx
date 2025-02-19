@@ -11,12 +11,12 @@ const LINK_LIST = [
   {
     icon: <PlaceIcon />,
     text: '장소 추가하기',
-    link: '/add/export',
+    link: '/add/export?type=place',
   },
   {
     icon: <EventIcon />,
     text: '이벤트 추가하기',
-    link: '/add/event',
+    link: '/add/export?type=event',
   },
 ];
 

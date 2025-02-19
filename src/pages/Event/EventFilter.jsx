@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const EventFilter = () => {
-  const [selectedCategory, setSelectedCategory] = useState('최신순');
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [showRegionFilter, setShowRegionFilter] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState(null);
 

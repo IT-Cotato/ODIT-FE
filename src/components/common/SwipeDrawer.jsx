@@ -7,50 +7,38 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
  * SwipeDrawer Component
  * A reusable and customizable swipeable bottom drawer component.
  *
- * @prop {boolean} open - Initial open state of the drawer. Default is `false`.
- * @prop {boolean} full - Determines if the drawer takes up the full height. Default is `false`.
  * @prop {boolean} modal - Controls the presence of a modal backdrop. Default is `true`.
  * @prop {boolean} disableClose - Prevents the drawer from being closed. Default is `false`.
  * @prop {string} height - The height of the drawer content if `full` is `false`. Default is `'fit-content'`.
  * @prop {React.ReactNode} children - The content to be rendered inside the drawer.
  */
-const SwipeDrawer = ({
-  open = false,
-  full = false,
-  modal = true,
-  disableClose = false,
-  height = 'fit-content',
-  children,
-}) => {
-  const [isOpen, setIsOpen] = React.useState(open);
-
+const SwipeDrawer = ({ modal = true, children }) => {
   const drawerBleeding = 32;
-
-  const toggleDrawer = (newOpen) => () => {
-    if (disableClose) {
-      return;
-    }
-
-    setIsOpen(newOpen);
-  };
 
   return (
     <>
       <Global
         styles={{
+          '.MuiDrawer-root': {
+            pointerEvents: modal ? 'auto' : 'none',
+          },
+
           '.MuiDrawer-root > .MuiPaper-root': {
-            height: `calc(${full ? `100%` : height} - ${drawerBleeding}px)`,
+            transition: 'height 0.3s ease-in-out, max-height 0.3s ease-in-out !important',
+            height: 'fit-content',
+            maxHeight: '14rem',
             overflow: 'visible',
+            pointerEvents: 'auto',
           },
         }}
       />
       <SwipeableDrawer
         anchor="bottom"
-        open={isOpen}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
+        open
+        disableSwipeToOpen
+        disableDiscovery
         swipeAreaWidth={drawerBleeding}
-        disableSwipeToisOpen={false}
+        onClose={() => {}}
         ModalProps={{
           keepMounted: true,
         }}
@@ -60,6 +48,7 @@ const SwipeDrawer = ({
               ? {}
               : {
                   backgroundColor: 'transparent',
+                  pointerEvents: 'none',
                 },
           },
         }}
@@ -75,6 +64,7 @@ const SwipeDrawer = ({
             left: 0,
             width: '100%',
             height: drawerBleeding,
+            pointerEvents: 'auto',
           }}
         >
           <Puller />

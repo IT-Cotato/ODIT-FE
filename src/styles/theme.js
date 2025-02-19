@@ -1,3 +1,5 @@
+import { koKR } from '@mui/x-date-pickers/locales';
+
 const color = {
   error: '#FF6060',
   main: {
@@ -41,6 +43,7 @@ const typography = {
 const theme = {
   color,
   typography,
+  koKR,
 };
 
 export default theme;

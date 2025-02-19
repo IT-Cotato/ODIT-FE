@@ -1,15 +1,19 @@
 import React from 'react';
 import { Stack, Typography, Box } from '@mui/material';
 import { useTheme } from '@emotion/react';
-import { Link, useNavigate } from 'react-router';
-import FullContainer from '../../../components/common/FullContainer';
-import TextFieldLarge from '../../../components/common/TextFieldLarge';
-import ButtonLarge from '../../../components/common/ButtonLarge';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router';
+import FullContainer from '../../components/common/FullContainer';
+import TextFieldLarge from '../../components/common/TextFieldLarge';
+import ButtonLarge from '../../components/common/ButtonLarge';
 
-const AddPlaceExportLink = () => {
+const AddExportLink = () => {
   const [link, setLink] = React.useState('');
 
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const [searchParams, _] = useSearchParams();
 
   const theme = useTheme();
 
@@ -18,7 +22,9 @@ const AddPlaceExportLink = () => {
   };
 
   const handleExportButton = () => {
-    navigate('/add/loading', { state: { link } });
+    navigate(`/add/loading${location.search}`, {
+      state: { link },
+    });
   };
 
   const renderInpuLink = () => {
@@ -66,7 +72,7 @@ const AddPlaceExportLink = () => {
             >
               링크 없이 저장하고 싶으신가요? &nbsp;
               <Link
-                to="/add/search"
+                to={searchParams.get('type') === 'event' ? '/add/event/0' : '/add/search/place'}
                 style={{
                   textDecoration: 'none',
                   color: theme.color.main[50],
@@ -97,4 +103,4 @@ const AddPlaceExportLink = () => {
   );
 };
 
-export default AddPlaceExportLink;
+export default AddExportLink;

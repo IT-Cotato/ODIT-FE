@@ -10,8 +10,8 @@ import ButtonLarge from '../../../components/common/ButtonLarge';
 
 const AddPlaceSeach = () => {
   const [searchText, setSearchText] = React.useState('');
-  const [searchResult, setSearchResult] = React.useState([]);
-  const [checkedPlaces, setCheckedPlaces] = React.useState([]);
+  const [searchResults, setSearchResults] = React.useState([]);
+  const [checkedResults, setCheckedResults] = React.useState([]);
 
   const debouncedSearchText = useDebounce({ value: searchText, delay: 500 });
 
@@ -22,24 +22,27 @@ const AddPlaceSeach = () => {
   };
 
   const handleSearchPlace = (data) => {
-    setSearchResult(data);
-    setCheckedPlaces([]);
+    setSearchResults(data);
+    setCheckedResults([]);
   };
 
-  const handleCheckPlace = (place) => {
-    const index = checkedPlaces.findIndex((checkedPlace) => checkedPlace.place_url === place.place_url);
+  const handleCheckPlace = (index) => {
+    const newCheckedResults = [...checkedResults];
+    const result = searchResults[index];
 
-    if (index === -1) {
-      setCheckedPlaces([...checkedPlaces, place]);
+    if (newCheckedResults.includes(result)) {
+      newCheckedResults.splice(newCheckedResults.indexOf(result), 1);
     } else {
-      setCheckedPlaces(checkedPlaces.filter((checkedPlace) => checkedPlace.place_url !== place.place_url));
+      newCheckedResults.push(result);
     }
+
+    setCheckedResults(newCheckedResults);
   };
 
   const handleNextButton = () => {
     navigate('/add/place/0', {
       state: {
-        places: checkedPlaces,
+        places: checkedResults,
       },
     });
   };
@@ -63,9 +66,9 @@ const AddPlaceSeach = () => {
             value={searchText}
             onChange={handleSearchTextChange}
           />
-          <AddSearchList searchResult={searchResult} checkedPlaces={checkedPlaces} onClick={handleCheckPlace} />
+          <AddSearchList searchResults={searchResults} checkedResults={checkedResults} onClick={handleCheckPlace} />
         </Box>
-        <ButtonLarge disabled={checkedPlaces.length === 0} color="enabled" onClick={handleNextButton}>
+        <ButtonLarge disabled={checkedResults.length === 0} color="enabled" onClick={handleNextButton}>
           다음으로
         </ButtonLarge>
       </FullContainer>

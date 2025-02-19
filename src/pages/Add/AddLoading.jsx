@@ -4,7 +4,7 @@ import Marquee from 'react-fast-marquee';
 import styled from '@emotion/styled';
 import { SyncLoader } from 'react-spinners';
 import { useTheme } from '@emotion/react';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate, useSearchParams } from 'react-router';
 import { ReactComponent as Coffee } from '../../assets/icons/coffee.svg';
 import { ReactComponent as Pizza } from '../../assets/icons/pizza.svg';
 import { ReactComponent as Cake } from '../../assets/icons/cake.svg';
@@ -16,6 +16,7 @@ import { ReactComponent as Home } from '../../assets/icons/home.svg';
 import { ReactComponent as Store } from '../../assets/icons/store.svg';
 import { ReactComponent as Theater } from '../../assets/icons/theater.svg';
 import { ReactComponent as Rice } from '../../assets/icons/rice.svg';
+import { PostSummary } from '../../apis/ai';
 
 const MARQUEE_LIST_TOP = [
   { key: 'coffee-0', component: <Coffee /> },
@@ -40,6 +41,8 @@ const AddLoading = () => {
   const location = useLocation();
 
   const navigate = useNavigate();
+
+  const [searchParams, _] = useSearchParams();
 
   const theme = useTheme();
 
@@ -106,10 +109,22 @@ const AddLoading = () => {
   };
 
   React.useEffect(() => {
-    if (!location.state) {
+    if (!location.state.link) {
       navigate('/add/place', { state: { fail: true } });
+    } else {
+      PostSummary(location.state.link)
+        .then((res) => {
+          if (res.error || res.data?.contentResponseList?.length === 0) {
+            navigate(`/add/${location.search}`, { state: { fail: true } });
+          }
+
+          navigate(`/add/select/${searchParams.get('type')}`, { state: { ...res.data } });
+        })
+        .catch(() => {
+          navigate(`/add${location.search}`, { state: { fail: true } });
+        });
     }
-  }, [location.state]);
+  }, [location.state.link]);
 
   return (
     <Box

@@ -2,7 +2,7 @@ import React from 'react';
 import { RouterProvider } from 'react-router';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
-import router from './router';
+import router from './routes';
 import theme from './styles/theme';
 
 const createdTheme = createTheme({

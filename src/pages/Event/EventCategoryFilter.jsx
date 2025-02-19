@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import { EventFilterContainer, EventFilterItem } from '../../styles/Event';
-import sort from '../../assets/icons/sort_16.svg';
+import { ReactComponent as SortIcon } from '../../assets/icons/sort_16.svg';
 
 const EVENT_LIST = ['최신순', '지역', '전체', '전시', '공연', '팝업', '축제', '기타'];
 
@@ -24,13 +24,11 @@ const EventCategoryFilter = ({ selectedCategory, handleCategoryClick }) => {
             {text}
           </Typography>
           {text === '최신순' && (
-            <img
-              src={sort}
-              alt="Sort Icon"
+            <SortIcon
               style={{
                 width: '16px',
                 height: '16px',
-                filter: selectedCategory === '최신순' ? '#6420FF' : 'black', // 보라색으로 바꾸기
+                fill: selectedCategory === '최신순' ? '#6420FF' : 'black', // 보라색으로 바꾸기
               }}
             />
           )}
