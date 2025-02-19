@@ -33,6 +33,7 @@ const useFriendPlaces = () => {
 
     mutate(
       {
+        ...data,
         data: newFriendPlaces,
       },
       false,
@@ -59,6 +60,7 @@ const useFriendPlaces = () => {
 
     mutate(
       {
+        ...data,
         data: newFriendPlaces,
       },
       false,

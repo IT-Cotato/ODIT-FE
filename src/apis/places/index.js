@@ -36,3 +36,9 @@ export const putPlacesVisit = async (place) => {
 
   return res.data;
 };
+
+export const postPlacesBookMark = async (place) => {
+  const res = await axiosInstance.post(`/api/places/${place.commonPlaceId}/bookMark`);
+
+  return res.data;
+};

@@ -1,21 +1,27 @@
 import React from 'react';
 import { Box, Fade, Stack, Typography } from '@mui/material';
+import useSWR from 'swr';
 import TextFieldLarge from '../../components/common/TextFieldLarge';
-import MapListItem from '../../components/Map/MapListItem';
 import useIsBottomDrawerFullOpenStore from '../../stores/useIsBottomDrawerFullOpenStore';
 import MapListCategoryFilter from '../../components/Map/MapListCategoryFilter';
 import { PLACE_CATEGORY_CODE_WITH_ALL_MAP } from '../../constant';
 import useDebounce from '../../hooks/useDebounce';
 import { ReactComponent as PlaceEmpty } from '../../assets/icons/place_empty.svg';
 import useFriendPlaces from '../../hooks/useFriendPlaces';
+import FriendListItem from '../../components/Friend/FriendListItem';
+import fetcher from '../../utils/fetcher';
 
 const FriendList = () => {
   const [checkedCategories, setCheckedCategories] = React.useState(['ALL']);
   const [searchText, setSearchText] = React.useState('');
+  const [checkedFriendPlaces, setCheckedFriendPlaces] = React.useState([]);
 
   const debouncedSearchText = useDebounce({ value: searchText, delay: 500 });
 
   const { isBottomDrawerFullOpen } = useIsBottomDrawerFullOpenStore();
+
+  const { data } = useSWR('/api/places', fetcher);
+  const myPlaces = data?.data || [];
 
   const { friendPlaces, handleSearchKeyword, handleFilterCategories } = useFriendPlaces();
 
@@ -41,6 +47,7 @@ const FriendList = () => {
 
   const renderPlaceList = () => {
     const places = friendPlaces?.map((friendPlace) => friendPlace.place) || [];
+
     const filteredPlaces = places.filter((place) => {
       if (checkedCategories.includes('ALL')) {
         return true;
@@ -77,7 +84,13 @@ const FriendList = () => {
       );
     }
 
-    return filteredPlaces.map((place) => <MapListItem key={place.commonPlaceId} place={place} />);
+    return filteredPlaces.map((place) => (
+      <FriendListItem
+        key={place.commonPlaceId}
+        place={place}
+        checkedPlaces={checkedFriendPlaces.map((friendPlace) => friendPlace.place)}
+      />
+    ));
   };
 
   React.useEffect(() => {
@@ -87,6 +100,18 @@ const FriendList = () => {
   React.useEffect(() => {
     handleSearchKeyword(debouncedSearchText);
   }, [debouncedSearchText]);
+
+  React.useEffect(() => {
+    if (!friendPlaces || !myPlaces) {
+      return;
+    }
+
+    setCheckedFriendPlaces(
+      friendPlaces.filter((friendPlace) =>
+        myPlaces.some((myPlace) => myPlace.commonPlaceId === friendPlace.place.commonPlaceId),
+      ),
+    );
+  }, [friendPlaces, myPlaces]);
 
   return (
     <Box
