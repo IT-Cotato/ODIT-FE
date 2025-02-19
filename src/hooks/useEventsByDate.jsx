@@ -15,9 +15,11 @@ const useEventsByDate = ({ selectedDate }) => {
 
       getEventsByDate(dateStr)
         .then((data) => {
+          console.log('받아온 이벤트 데이터:', data);
           setEvents(data);
         })
         .catch((err) => {
+          console.error('이벤트 가져오기 실패:', err);
           setError('이벤트를 가져오는 중 오류가 발생했습니다.');
         })
         .finally(() => {

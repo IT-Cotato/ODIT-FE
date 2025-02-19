@@ -28,7 +28,9 @@ export const getEventsById = async (event) => {
 };
 
 export const getEventsByDate = async (date) => {
-  const res = await axiosInstance.get(`/api/events/date?date=${date}`);
+  const res = await axiosInstance.get('/api/events/date', {
+    params: { date },
+  });
 
   return res.data;
 };

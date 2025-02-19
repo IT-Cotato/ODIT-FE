@@ -1,13 +1,51 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import { EventFilterContainer, EventFilterItem } from '../../styles/Event';
-import { ReactComponent as SortIcon } from '../../assets/icons/sort_16.svg';
+import sort from '../../assets/icons/sort_16.svg';
+import EventRegionFilter from './EventRegionFilter';
 
-const EVENT_LIST = ['최신순', '지역', '전체', '전시', '공연', '팝업', '축제', '기타'];
+const EVENT_LIST = ['전시', '공연', '팝업', '축제', '기타'];
 
 const EventCategoryFilter = ({ selectedCategory, handleCategoryClick }) => {
   return (
     <EventFilterContainer>
+      <EventFilterItem
+        onClick={() => handleCategoryClick('latest')}
+        style={{
+          background: selectedCategory === 'latest' ? '#EFE9FF' : 'transparent',
+          border: selectedCategory === 'latest' ? '1px solid #6420FF' : '1px solid #E0E0E0',
+          color: selectedCategory === 'latest' ? '#6420FF' : 'black',
+          padding: '10px 16px',
+          borderRadius: '20px',
+        }}
+      >
+        <Typography fontSize="14px" fontWeight={selectedCategory === 'latest' ? '700' : '400'}>
+          최신순
+        </Typography>
+        <img
+          src={sort}
+          alt="Sort Icon"
+          style={{
+            width: '16px',
+            height: '16px',
+            filter: selectedCategory === '최신순' ? '#6420FF' : 'black',
+          }}
+        />
+      </EventFilterItem>
+      <EventFilterItem
+        onClick={() => handleCategoryClick('region')}
+        style={{
+          background: selectedCategory === 'region' ? '#EFE9FF' : 'transparent',
+          border: selectedCategory === 'region' ? '1px solid #6420FF' : '1px solid #E0E0E0',
+          color: selectedCategory === 'region' ? '#6420FF' : 'black',
+          padding: '10px 16px',
+          borderRadius: '20px',
+        }}
+      >
+        <Typography fontSize="14px" fontWeight={selectedCategory === 'region' ? '700' : '400'}>
+          지역
+        </Typography>
+      </EventFilterItem>
       {EVENT_LIST.map((text) => (
         <EventFilterItem
           key={text}
@@ -23,15 +61,6 @@ const EventCategoryFilter = ({ selectedCategory, handleCategoryClick }) => {
           <Typography fontSize="14px" fontWeight={selectedCategory === text ? '700' : '400'}>
             {text}
           </Typography>
-          {text === '최신순' && (
-            <SortIcon
-              style={{
-                width: '16px',
-                height: '16px',
-                fill: selectedCategory === '최신순' ? '#6420FF' : 'black', // 보라색으로 바꾸기
-              }}
-            />
-          )}
         </EventFilterItem>
       ))}
     </EventFilterContainer>
