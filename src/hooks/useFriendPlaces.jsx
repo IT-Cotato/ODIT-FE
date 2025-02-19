@@ -1,4 +1,3 @@
-import React from 'react';
 import useSWR from 'swr';
 import fetcher from '../utils/fetcher';
 import { PLACE_CATEGORY_CODE_MAP } from '../constant';
