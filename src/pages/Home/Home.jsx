@@ -24,7 +24,7 @@ const Home = () => {
           }}
         >
           <div>저장한 장소</div>
-          {placesRes?.data.map((place) => (
+          {(placesRes?.data || []).map((place) => (
             <Box
               key={place.commonPlaceId}
               sx={{
@@ -51,7 +51,7 @@ const Home = () => {
           }}
         >
           <div>저장한 이벤트</div>
-          {eventsRes?.data.map((event) => (
+          {(eventsRes?.data || []).map((event) => (
             <Box
               key={event.id}
               sx={{
