@@ -6,6 +6,7 @@ import HeaderFriend from '../../components/Friend/HeaderFriend';
 import useCurrentLocation from '../../hooks/useCurrentLocation';
 import BottomDrawer from '../../components/common/BottomDrawer';
 import fetcher from '../../utils/fetcher';
+import FriendList from './FriendList';
 
 const Friend = () => {
   const { data } = useSWR('/api/places/friend', fetcher);
@@ -64,7 +65,7 @@ const Friend = () => {
         <OverlayBox>
           <PointerEventsBox>
             <BottomDrawer>
-              <div>asdf</div>
+              <FriendList />
             </BottomDrawer>
           </PointerEventsBox>
         </OverlayBox>

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Box, Fade, Stack, Typography } from '@mui/material';
 import TextFieldLarge from '../../components/common/TextFieldLarge';
-import usePlaces from '../../hooks/usePlaces';
 import MapListItem from '../../components/Map/MapListItem';
 import useIsBottomDrawerFullOpenStore from '../../stores/useIsBottomDrawerFullOpenStore';
 import MapListCategoryFilter from '../../components/Map/MapListCategoryFilter';
 import { PLACE_CATEGORY_CODE_WITH_ALL_MAP } from '../../constant';
 import useDebounce from '../../hooks/useDebounce';
 import { ReactComponent as PlaceEmpty } from '../../assets/icons/place_empty.svg';
+import useFriendPlaces from '../../hooks/useFriendPlaces';
 
-const MapList = () => {
+const FriendList = () => {
   const [checkedCategories, setCheckedCategories] = React.useState(['ALL']);
   const [searchText, setSearchText] = React.useState('');
 
@@ -17,7 +17,7 @@ const MapList = () => {
 
   const { isBottomDrawerFullOpen } = useIsBottomDrawerFullOpenStore();
 
-  const { places, handleFilterCategories, handleSearchKeyword } = usePlaces();
+  const { friendPlaces, handleSearchKeyword, handleFilterCategories } = useFriendPlaces();
 
   const handleCheckedCategoriesChange = (code) => {
     if (code === 'ALL' && !checkedCategories.includes(code)) {
@@ -40,6 +40,7 @@ const MapList = () => {
   };
 
   const renderPlaceList = () => {
+    const places = friendPlaces?.map((friendPlace) => friendPlace.place) || [];
     const filteredPlaces = places.filter((place) => {
       if (checkedCategories.includes('ALL')) {
         return true;
@@ -123,4 +124,4 @@ const MapList = () => {
   );
 };
 
-export default MapList;
+export default FriendList;
