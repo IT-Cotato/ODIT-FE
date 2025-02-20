@@ -12,6 +12,8 @@ const AsyncAdd = React.lazy(() => import('../pages/Add/AddLayout'));
 const AsyncMap = React.lazy(() => import('../pages/Map/Map'));
 const AsyncEvent = React.lazy(() => import('../pages/Event/Event'));
 // 변경: isAuthRequired: true!! 없애거나 false로 register부터 쭉
+const AsyncEventSelect = React.lazy(() => import('../pages/Event/EventSelect'));
+
 const ROUTE_INFO = [
   {
     path: '/',
@@ -48,6 +50,11 @@ const ROUTE_INFO = [
   {
     path: '/event',
     element: <AsyncEvent />,
+    isAuthRequired: false,
+  },
+  {
+    path: '/EventSelect',
+    element: <AsyncEventSelect />,
     isAuthRequired: false,
   },
   {
