@@ -89,7 +89,7 @@ export const EventFilterItem = styled.div`
   border-radius: 20px;
   padding: 10px 16px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: none;
   background: ${({ selected }) => (selected ? '#EFE9FF' : 'transparent')};
   border: ${({ selected }) => (selected ? '1px solid #6420FF' : '1px solid #000000')};
   color: ${({ selected }) => (selected ? '#6420FF' : 'black')};
@@ -155,13 +155,14 @@ export const EmptyEventMessage = styled(Typography)`
 
 export const EventList = styled(Box)`
   width: 100%;
-  height: 124px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
+  max-height: 500px;
+  overflow-y: auto;
 `;
 
 export const EventCategory = styled(Typography)`

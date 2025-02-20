@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
 import { Box, Typography } from '@mui/material';
-import dayjs from 'dayjs';
 import HeaderSub from '../../components/common/HeaderSub';
 import EventFilter from './EventFilter';
-import EventCategoryFilter from './EventCategoryFilter';
 import { EVENT_CATEGORY_CODE_MAP } from '../../constant';
 import CheckBox from '../../components/common/CheckBox';
 import fetcher from '../../utils/fetcher';
@@ -52,20 +50,24 @@ const EventSelect = () => {
             </EventFilterItem>
           ))}
         </EventFilterContainer>
+        <Box sx={{ width: '100%', borderBottom: '1px solid #E0E0E0', marginTop: '10px' }} />
         {error && <Typography color="error">데이터를 불러오는 데 실패했습니다.</Typography>}
         {!eventsRes ? (
           <Typography>로딩 중...</Typography>
         ) : filteredEvents.length === 0 ? (
           <Typography>기간이 없는 이벤트가 없습니다.</Typography>
         ) : (
-          filteredEvents.map((event) => (
-            <EventList key={event.id}>
-              <EventCategory>{EVENT_CATEGORY_CODE_MAP[event.category]}</EventCategory>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <CheckBox checked={checkedEvents[event.id] || false} onChange={() => handleCheckChange(event.id)} />
-                <EventName>{event.name}</EventName>
-              </Box>
-            </EventList>
+          filteredEvents.map((event, index) => (
+            <div key={event.id}>
+              <EventList sx={{ padding: '16px 0' }}>
+                <EventCategory>{EVENT_CATEGORY_CODE_MAP[event.category]}</EventCategory>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <CheckBox checked={checkedEvents[event.id] || false} onChange={() => handleCheckChange(event.id)} />
+                  <EventName>{event.name}</EventName>
+                </Box>
+              </EventList>
+              {index !== filteredEvents.length - 1 && <hr style={{ border: '0.5px solid #E0E0E0', width: '100%' }} />}
+            </div>
           ))
         )}
       </Box>

@@ -36,6 +36,7 @@ import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { EVENT_CATEGORY_CODE_MAP } from '../../constant';
 import CheckBox from '../../components/common/CheckBox';
+import useSortedEvents from '../../hooks/useSortedEvents';
 
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
@@ -71,6 +72,9 @@ const Event = () => {
       [eventId]: !prev[eventId],
     }));
   };
+
+  const { selectedSort, handleSortChange } = EventFilter();
+  const sortedEvents = useSortedEvents(eventsRes?.data, selectedSort);
 
   return (
     <>
@@ -115,56 +119,21 @@ const Event = () => {
                 zIndex: 5,
               }}
             >
+              {/* isBottomDrawerFullOpen 참일 때 */}
               {isBottomDrawerFullOpen ? (
                 <Fade in={isBottomDrawerFullOpen}>
                   <BottomDrawerBox>
                     <Title variant="h1">나의 이벤트</Title>
                     <TextFieldLarge outlined={false} placeholder="기간을 설정할 수 있어요" />
+
                     <EventCategoryFilter
+                      selectedSort={selectedSort}
+                      handleSortChange={handleSortChange}
                       selectedCategory={selectedCategory}
                       handleCategoryClick={handleCategoryClick}
                     />
-                    {(eventsRes?.data || []).map((event) => (
-                      <EventList key={event.id}>
-                        <EventCategory>{EVENT_CATEGORY_CODE_MAP[event.category]}</EventCategory>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <CheckBox
-                            checked={checkedEvents[event.id] || false}
-                            onChange={() => handleCheckChange(event.id)}
-                          />
-                          <EventName>{event.name}</EventName>
-                        </Box>
-                        <EventDate>
-                          {event.startDate
-                            ? `${dayjs(event.startDate).format('YYYY-MM-DD')} - ${dayjs(event.endDate).format('YYYY-MM-DD')}`
-                            : '기간 없음'}
-                        </EventDate>
-                      </EventList>
-                    ))}
-                  </BottomDrawerBox>
-                </Fade>
-              ) : (
-                <Box sx={{ padding: '1rem' }}>
-                  <EventCategoryFilter selectedCategory={selectedCategory} handleCategoryClick={handleCategoryClick} />
-                  {loading && <Typography>로딩 중...</Typography>}
-                  {error && <Typography color="error">{error}</Typography>}
-                  {events.length === 0 ? (
-                    <Box sx={{ textAlign: 'center' }}>
-                      <StyledEmptyEventIcon />
-                      <EmptyEventMessage>아직 저장한 이벤트가 없어요</EmptyEventMessage>
-                    </Box>
-                  ) : (
-                    (eventsRes?.data || [])
-                      .filter((event) => {
-                        const eventStart = dayjs(event.startDate);
-                        const eventEnd = dayjs(event.endDate);
-                        const selectedDay = dayjs(selectedDate);
-
-                        return (
-                          selectedDay.isSameOrAfter(eventStart, 'day') && selectedDay.isSameOrBefore(eventEnd, 'day')
-                        );
-                      })
-                      .map((event) => (
+                    {sortedEvents.map((event, index) => (
+                      <div key={event.id}>
                         <EventList key={event.id}>
                           <EventCategory>{EVENT_CATEGORY_CODE_MAP[event.category]}</EventCategory>
                           <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -180,6 +149,58 @@ const Event = () => {
                               : '기간 없음'}
                           </EventDate>
                         </EventList>
+                        {index !== events.length - 1 && <hr style={{ border: '0.5px solid #E0E0E0', width: '95%' }} />}
+                      </div>
+                    ))}
+                  </BottomDrawerBox>
+                </Fade>
+              ) : (
+                <Box sx={{ padding: '1rem' }}>
+                  <EventCategoryFilter
+                    selectedSort={selectedSort}
+                    handleSortChange={handleSortChange}
+                    selectedCategory={selectedCategory}
+                    handleCategoryClick={handleCategoryClick}
+                  />
+                  {loading && <Typography>로딩 중...</Typography>}
+                  {error && <Typography color="error">{error}</Typography>}
+                  {events.length === 0 ? (
+                    <Box sx={{ textAlign: 'center' }}>
+                      <StyledEmptyEventIcon />
+                      <EmptyEventMessage>아직 저장한 이벤트가 없어요</EmptyEventMessage>
+                    </Box>
+                  ) : (
+                    (sortedEvents || [])
+                      .filter((event) => {
+                        const eventStart = dayjs(event.startDate);
+                        const eventEnd = dayjs(event.endDate);
+                        const selectedDay = dayjs(selectedDate);
+
+                        return (
+                          selectedDay.isSameOrAfter(eventStart, 'day') && selectedDay.isSameOrBefore(eventEnd, 'day')
+                        );
+                      })
+                      .map((event, index) => (
+                        <div key={event.id}>
+                          <EventList key={event.id}>
+                            <EventCategory>{EVENT_CATEGORY_CODE_MAP[event.category]}</EventCategory>
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                              <CheckBox
+                                checked={checkedEvents[event.id] || false}
+                                onChange={() => handleCheckChange(event.id)}
+                              />
+                              <EventName>{event.name}</EventName>
+                            </Box>
+                            <EventDate>
+                              {event.startDate
+                                ? `${dayjs(event.startDate).format('YYYY-MM-DD')} - ${dayjs(event.endDate).format('YYYY-MM-DD')}`
+                                : '기간 없음'}
+                            </EventDate>
+                          </EventList>
+                          {index !== events.length - 1 && (
+                            <hr style={{ border: '0.5px solid #E0E0E0', width: '95%' }} />
+                          )}
+                        </div>
                       ))
                   )}
                 </Box>
