@@ -5,7 +5,6 @@ const useEventsByDate = ({ selectedDate }) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  console.log('선택한 날짜:', selectedDate);
 
   useEffect(() => {
     if (selectedDate) {

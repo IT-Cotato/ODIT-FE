@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { Box, Typography } from '@mui/material';
 import NavigationBar from '../components/common/NavigationBar';
 import { ReactComponent as EmptyEventIcon } from '../assets/icons/empty_event.svg';
-import BottomDrawer from '../components/common/BottomDrawer';
 
 export const Topbar = styled.div`
   width: 375px;
