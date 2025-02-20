@@ -1,4 +1,8 @@
 import styled from '@emotion/styled';
+import { Box, Typography } from '@mui/material';
+import NavigationBar from '../components/common/NavigationBar';
+import { ReactComponent as EmptyEventIcon } from '../assets/icons/empty_event.svg';
+import BottomDrawer from '../components/common/BottomDrawer';
 
 export const Topbar = styled.div`
   width: 375px;
@@ -96,4 +100,98 @@ export const EventIconButton = styled.button`
   position: absolute;
   top: 18px;
   left: 323px;
+`;
+
+export const Button = styled.button`
+  background: none;
+  border: none;
+  left: 283px;
+  width: 50px;
+  height: 50px;
+  top: 8px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+`;
+
+export const BottomDrawerBox = styled(Box)`
+  width: 100%;
+  height: 778px;
+  justify-content: center;
+  margin-top: 1.5rem;
+  margin-bottom: -1rem;
+  align-items: center;
+  margin-left: 20px;
+`;
+
+export const Title = styled(Typography)`
+  color: ${(props) => props.theme.color.black[900]};
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 140%;
+`;
+
+export const StyledEmptyEventIcon = styled(EmptyEventIcon)`
+  width: 72px;
+  height: 90px;
+  margin-top: 1.5rem;
+`;
+
+export const EmptyEventMessage = styled(Typography)`
+  color: ${(props) => props.theme.color.main[50]};
+  font-family: Pretendard;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19.2px;
+  letter-spacing: 0%;
+  text-align: center;
+  margin-top: 1.5rem;
+`;
+
+export const EventList = styled(Box)`
+  width: 100%;
+  height: 124px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+`;
+
+export const EventCategory = styled(Typography)`
+  color: ${(props) => props.theme.color.main[100]};
+  font-family: Pretendard;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16.8px;
+  letter-spacing: 0%;
+  margin-left: 60px;
+`;
+
+export const EventName = styled(Typography)`
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 21.6px;
+  letter-spacing: 0%;
+  margin-left: 35px;
+  margin-top: 8px;
+`;
+
+export const EventDate = styled(Typography)`
+  color: ${(props) => props.theme.color.black[400]};
+  font-family: Pretendard;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16.8px;
+  letter-spacing: 0%;
+  margin-left: 60px;
+  margin-top: 8px;
+`;
+
+export const StyledNavigationBar = styled(NavigationBar)`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 `;

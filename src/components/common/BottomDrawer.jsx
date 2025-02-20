@@ -23,7 +23,7 @@ const BottomDrawer = ({ open = true, blocking = false, footer, children }) => {
       open={open}
       blocking={blocking}
       ref={sheetRef}
-      snapPoints={({ headerHeight, maxHeight }) => [headerHeight, maxHeight * 0.5, maxHeight]}
+      snapPoints={({ headerHeight, maxHeight }) => [headerHeight * 3, maxHeight * 0.5, maxHeight]}
       defaultSnap={({ maxHeight }) => maxHeight * 0.5}
       onSpringEnd={() => setIsBottomDrawerFullOpen(sheetRef.current?.height === window.innerHeight)}
       footer={footer}
