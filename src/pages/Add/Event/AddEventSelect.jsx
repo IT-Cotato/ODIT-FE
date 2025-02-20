@@ -30,7 +30,7 @@ const AddEventSelect = () => {
   };
 
   React.useEffect(() => {
-    setSearchedEvents(location.state.data.contentResponseList);
+    setSearchedEvents(location.state.contentResponseList);
   }, [location.state]);
 
   return (
