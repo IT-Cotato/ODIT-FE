@@ -46,6 +46,7 @@ const Event = () => {
   const { events, loading, error } = useEventsByDate({ selectedDate });
   const [month, setMonth] = useState(new Date());
   const { selectedCategory, handleCategoryClick } = EventFilter();
+  const currentYear = new Date().getFullYear();
 
   const { data: eventsRes } = useSWR('/api/events', fetcher);
 
@@ -95,10 +96,13 @@ const Event = () => {
               hideNavigation
               caption={null}
               captionLayout="dropdown"
+              fromYear={currentYear - 1}
+              toYear={currentYear + 1}
               showOutsideDays
               modifiers={{
                 selected: selectedDate ? [selectedDate] : [],
               }}
+              modifiersClassNames={{ selected: 'my-selected-day' }}
             />
           </StyledDayPicker>
           <Box sx={{ position: 'relative' }}>

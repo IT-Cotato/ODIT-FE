@@ -2,7 +2,6 @@ import React from 'react';
 import { Typography } from '@mui/material';
 import { EventFilterContainer, EventFilterItem } from '../../styles/Event';
 import sort from '../../assets/icons/sort_16.svg';
-import EventRegionFilter from './EventRegionFilter';
 
 const EVENT_LIST = ['전시', '공연', '팝업', '축제', '기타'];
 
@@ -12,14 +11,14 @@ const EventCategoryFilter = ({ selectedCategory, handleCategoryClick }) => {
       <EventFilterItem
         onClick={() => handleCategoryClick('latest')}
         style={{
-          background: selectedCategory === 'latest' ? '#EFE9FF' : 'transparent',
+          background: 'transparent',
           border: selectedCategory === 'latest' ? '1px solid #6420FF' : '1px solid #E0E0E0',
           color: selectedCategory === 'latest' ? '#6420FF' : 'black',
           padding: '10px 16px',
           borderRadius: '20px',
         }}
       >
-        <Typography fontSize="14px" fontWeight={selectedCategory === 'latest' ? '700' : '400'}>
+        <Typography fontSize="14px" fontWeight={selectedCategory === '500'}>
           최신순
         </Typography>
         <img

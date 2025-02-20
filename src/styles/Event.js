@@ -52,8 +52,7 @@ export const StyledDayPicker = styled.div`
   .rdp-day {
     width: 47px;
     height: 47px;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
+    font-size: 1.3rem;
   }
 
   // .rdp-today {
@@ -65,6 +64,13 @@ export const StyledDayPicker = styled.div`
 
   .rdp-outside {
     color: #bdbdbd;
+  }
+
+  .my-selected-day {
+    color: white;
+    font-weight: bold;
+    background: #424242;
+    border-radius: 50%;
   }
 `;
 
