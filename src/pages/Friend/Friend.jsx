@@ -7,6 +7,7 @@ import useCurrentLocation from '../../hooks/useCurrentLocation';
 import BottomDrawer from '../../components/common/BottomDrawer';
 import fetcher from '../../utils/fetcher';
 import FriendList from './FriendList';
+import NavigationBar from '../../components/common/NavigationBar';
 
 const Friend = () => {
   const { data } = useSWR('/api/places/friend', fetcher);
@@ -64,7 +65,7 @@ const Friend = () => {
       <FullContainer>
         <OverlayBox>
           <PointerEventsBox>
-            <BottomDrawer>
+            <BottomDrawer footer={<NavigationBar />}>
               <FriendList />
             </BottomDrawer>
           </PointerEventsBox>
