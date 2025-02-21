@@ -30,14 +30,14 @@ const EventDatePickerActionBar = (props) => {
       }}
     >
       {buttonList.map(({ text, onClick, color }, index) => (
-        <>
-          <Box key={text} sx={{ flex: 1, display: 'flex', justifyContent: 'center', py: '0.5rem' }}>
+        <React.Fragment key={text}>
+          <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', py: '0.5rem' }}>
             <Button onClick={onClick} sx={{ color, fontSize: '1rem', fontWeight: 500 }}>
               {text}
             </Button>
           </Box>
           {index === 0 && <Box sx={{ width: '1px', height: '100%', background: theme.color.black[50] }} />}
-        </>
+        </React.Fragment>
       ))}
     </Box>
   );

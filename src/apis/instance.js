@@ -8,7 +8,8 @@ const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
   withCredentials: true,
 });
-
+console.log('Base URL:', process.env.REACT_APP_BASE_URL);
+console.log('Current Environment:', process.env.NODE_ENV);
 axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
 

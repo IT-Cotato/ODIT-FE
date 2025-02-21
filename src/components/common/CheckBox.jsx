@@ -10,15 +10,15 @@ import { ReactComponent as SquareCheckIcon } from '../../assets/icons/square_che
  * @param {function} onChange - change event for the checkbox
  * @returns
  */
-const CheckBox = ({ checked, onChange }) => {
+const CheckBox = ({ checked, onChange, icon = <SquareIcon />, checkedIcon = <SquareCheckIcon /> }) => {
   const theme = useTheme();
 
   return (
     <Checkbox
       checked={checked}
       onChange={onChange}
-      checkedIcon={<SquareCheckIcon />}
-      icon={<SquareIcon />}
+      checkedIcon={checkedIcon}
+      icon={icon}
       sx={{
         color: theme.color.black[200],
         padding: 0,
