@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="90" fill="none"><circle cx="26" cy="26" r="26" fill="url(#a)"/>
+    <path fill="#763BFF" d="M20 48h48v16a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V48Z"/><g filter="url(#b)">
+    <path fill="#E9DFFF" d="M19.788 48H68l-3.06 12.922A4 4 0 0 1 61.049 64h-39.99a4 4 0 0 1-3.893-4.922L19.788 48Z"/></g>
+    <path fill="#EFE9FF" d="M20 32h48v16H20z"/>
+    <path fill="#C1A6FF" d="M20 22a4 4 0 0 1 4-4h40a4 4 0 0 1 4 4v10H20V22Z"/><circle cx="32" cy="25" r="4" fill="#8A58FF"/><circle cx="56" cy="25" r="4" fill="#8A58FF"/><rect width="4" height="14" x="30" y="13" fill="#E9DFFF" rx="2"/><rect width="4" height="14" x="54" y="13" fill="#E9DFFF" rx="2"/>
+    <path fill="#8A58FF" d="m10.998 42 5.001-5 12 12-5 5-12.001-12Z"/>
+    <path fill="#fff" d="m28.999 56-6-2 5-5 2 6-1 1Z"/>
+    <path fill="#C1A6FF" d="m7.999 39 5-4.998L15.999 37l-5 5-3-3Z"/><ellipse cx="30" cy="2" fill="#EFE9FF" rx="30" ry="2" transform="matrix(1 0 0 -1 6 90)"/><defs><linearGradient id="a" x1="26" x2="26" y1="0" y2="52" gradientUnits="userSpaceOnUse"><stop stop-color="#F6F2FF"/><stop offset="1" stop-color="#F6F2FF" stop-opacity="0"/></linearGradient><filter id="b" width="51.444" height="16.5" x="16.556" y="47.5" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dx="-.5" dy="-.5"/><feGaussianBlur stdDeviation=".25"/><feComposite in2="hardAlpha" k2="-1" k3="1" operator="arithmetic"/><feColorMatrix values="0 0 0 0 0.937255 0 0 0 0 0.913725 0 0 0 0 1 0 0 0 0.5 0"/><feBlend in2="shape" result="effect1_innerShadow_3721_6776"/></filter></defs>
+</svg>

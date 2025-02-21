@@ -123,8 +123,19 @@ const AddEvent = () => {
   React.useEffect(() => {
     if (location.state?.events) {
       const newEvents = location.state.events.map((event) => {
-        const startPeriod = event?.period.split('to')[0];
-        const endPeriod = event?.period.split('to')[1];
+        let startPeriod;
+        let endPeriod;
+        if (event.period.includes('to')) {
+          startPeriod = event?.period.split('to')[0];
+          endPeriod = event?.period.split('to')[1];
+        } else {
+          startPeriod = event?.period.split('-')[0];
+          endPeriod = event?.period.split('-')[1];
+        }
+
+        if (startPeriod && !endPeriod) {
+          endPeriod = startPeriod;
+        }
 
         return {
           name: event.name,

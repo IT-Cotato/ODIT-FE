@@ -12,6 +12,7 @@ import useIsBottomDrawerFullOpenStore from '../../stores/useIsBottomDrawerFullOp
  * @prop {boolean} blocking - Determines if the drawer blocks the background. Default is `false`.
  * @prop {React.ReactNode} children - The content to be rendered inside the drawer.
  */
+
 const BottomDrawer = ({ open = true, blocking = false, footer, children }) => {
   const { setIsBottomDrawerFullOpen } = useIsBottomDrawerFullOpenStore();
 
@@ -22,7 +23,7 @@ const BottomDrawer = ({ open = true, blocking = false, footer, children }) => {
       open={open}
       blocking={blocking}
       ref={sheetRef}
-      snapPoints={({ headerHeight, maxHeight }) => [headerHeight, maxHeight * 0.5, maxHeight]}
+      snapPoints={({ headerHeight, maxHeight }) => [headerHeight * 3, maxHeight * 0.5, maxHeight]}
       defaultSnap={({ maxHeight }) => maxHeight * 0.5}
       onSpringEnd={() => setIsBottomDrawerFullOpen(sheetRef.current?.height === window.innerHeight)}
       footer={footer}
@@ -50,7 +51,6 @@ const StyledBottomSheet = styled(BottomSheet)`
       background: ${({ theme }) => theme.color.black[200]};
     }
   }
-
   [data-rsbs-footer] {
     padding: 0;
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, useTheme } from '@mui/material';
 import { PLACE_CATEGORY_CODE_WITH_ALL_MAP } from '../../constant';
-import FilterChip from '../../components/common/FilterChip';
+import FilterChip from '../common/FilterChip';
 
 const MapListCategoryFilter = ({ checkedCategories, onChange }) => {
   const theme = useTheme();
