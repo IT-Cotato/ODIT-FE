@@ -37,6 +37,7 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { EVENT_CATEGORY_CODE_MAP } from '../../constant';
 import CheckBox from '../../components/common/CheckBox';
 import useSortedEvents from '../../hooks/useSortedEvents';
+import HeaderSub from '../../components/common/HeaderSub';
 
 dayjs.extend(isBetween);
 dayjs.extend(isSameOrAfter);
@@ -78,8 +79,14 @@ const Event = () => {
 
   return (
     <>
+      <HeaderSub />
       <FullContainer>
-        <div className="App">
+        <div
+          className="App"
+          style={{
+            marginTop: '-5rem',
+          }}
+        >
           <Topbar>
             <Button onClick={handleSearchIconClick}>
               <SearchIcon />

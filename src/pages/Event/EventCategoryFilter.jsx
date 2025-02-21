@@ -2,8 +2,7 @@ import React from 'react';
 import { Typography, Box, Button } from '@mui/material';
 import { EventFilterContainer, EventFilterItem } from '../../styles/Event';
 import sort from '../../assets/icons/sort_16.svg';
-
-const EVENT_LIST = ['전시', '공연', '팝업', '축제', '기타'];
+import { EVENT_CATEGORY_CODE_MAP } from '../../constant';
 
 const EventCategoryFilter = ({ selectedCategory, handleCategoryClick, selectedSort, handleSortChange }) => {
   return (
@@ -33,7 +32,7 @@ const EventCategoryFilter = ({ selectedCategory, handleCategoryClick, selectedSo
             }}
           />
         </Button>
-        <EventFilterItem
+        {/* <EventFilterItem
           onClick={() => handleCategoryClick('region')}
           style={{
             background: selectedCategory === 'region' ? '#EFE9FF' : 'transparent',
@@ -46,8 +45,8 @@ const EventCategoryFilter = ({ selectedCategory, handleCategoryClick, selectedSo
           <Typography fontSize="14px" fontWeight={selectedCategory === 'region' ? '700' : '400'}>
             지역
           </Typography>
-        </EventFilterItem>
-        {EVENT_LIST.map((text) => (
+        </EventFilterItem> */}
+        {Object.values(EVENT_CATEGORY_CODE_MAP).map((text) => (
           <EventFilterItem
             key={text}
             onClick={() => handleCategoryClick(text)}
