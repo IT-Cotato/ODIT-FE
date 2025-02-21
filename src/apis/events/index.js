@@ -14,3 +14,29 @@ export const postEvents = async (event) => {
 
   return res;
 };
+
+export const getAllEvents = async () => {
+  const res = await axiosInstance.get('/api/events');
+
+  return res.data;
+};
+
+export const getEventsById = async (event) => {
+  const res = await axiosInstance.get(`/api/events/${event.id}`);
+
+  return res.data;
+};
+
+export const getEventsByDate = async (date) => {
+  const res = await axiosInstance.get('/api/events/date', {
+    params: { date },
+  });
+
+  return res.data;
+};
+
+export const deleteEvents = async (event) => {
+  const res = await axiosInstance.delete(`/api/events/${event.id}`);
+
+  return res.data;
+};

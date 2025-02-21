@@ -31,7 +31,7 @@ const EventDatePicker = ({ disabled = false, date, label, onChange }) => {
       <DatePicker
         format="YYYY/MM/DD"
         disabled={disabled}
-        value={date && dayjs(date)}
+        value={date ? dayjs(date) : null}
         label={label}
         onChange={handleDateChange}
         sx={{
