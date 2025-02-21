@@ -18,6 +18,7 @@ const FullContainer = ({ height = `calc(100% - ${HEADER_HEIGHT})`, children }) =
         height,
         padding: '1.5rem',
         boxSizing: 'border-box',
+        overflowY: 'scroll',
       }}
     >
       {children}
